@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+Connect Four.dev
+Connect Four.layout
+Makefile.win
