@@ -12,8 +12,8 @@ using namespace std;
 	Clase que representa cada casilla que puede ser ocupada.
 	Una casilla puede tener uno de los siguientes valores:
 		'\0', que significa que la casilla está vacía
-		'X', que significa que la casilla está ocupada por una ficha del equipo A
-		'O', que significa que la casilla está ocupada por una ficha del equipo B
+		'a', que significa que la casilla representa una X
+		'b', que significa que la casilla representa una O
 
 */
 
@@ -26,7 +26,9 @@ class Casilla{
 	public:
 		
 		Casilla();
-		setFicha(char equipo);
+		Casilla(char ficha);
+		char getFicha();
+		void setFicha(char equipo);
 		~Casilla();
 	
 };
