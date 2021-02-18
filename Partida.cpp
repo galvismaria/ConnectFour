@@ -9,6 +9,7 @@ Partida::Partida(){
 void Partida::mostrarDisplay(){
 	
 	system("cls");
+<<<<<<< Updated upstream
 	
 	cout << "\n\t\t\t\t | 1 | | 2 | | 3 | | 4 | | 5 | | 6 | | 7 | \n";
 	
@@ -17,6 +18,20 @@ void Partida::mostrarDisplay(){
 		for (int j = 0 ; j < ANCHO; j++){
 			cout << " |   |";
 		}
+=======
+	tablero->mostrarTabla();
+	tablero->colocarFicha(0, 0, 'a');
+	tablero->colocarFicha(1, 1, 'a');
+	tablero->colocarFicha(2, 2, 'a');
+	tablero->colocarFicha(3, 3, 'a');
+	tablero->colocarFicha(4, 4, 'a');
+
+	system("cls");
+	tablero->mostrarTabla();
+	
+		if (tablero->conectaCuatro('a'))
+		cout<<"\n\n en linea";
+>>>>>>> Stashed changes
 		
 		cout <<"\t\t\t\t\n";
 	}
