@@ -8,7 +8,7 @@ Partida::Partida(){
 
 void Partida::mostrarDisplay(){
 	
-	//system("cls");
+	system("cls");
 	
 	/*cout << "\n\t\t\t\t | 1 | | 2 | | 3 | | 4 | | 5 | | 6 | | 7 | \n";
 	
@@ -18,10 +18,10 @@ void Partida::mostrarDisplay(){
 			cout << " |   |";
 		}
 	}*/
-	cout<<"lol";
-	tablero->hacerMovimiento(2, 'a');
-	cout<<"lol";
-	//tablero->hacerMovimiento(1, 'a');
+	tablero->hacerMovimiento(6, 'a');
+	tablero->hacerMovimiento(0, 'a');
+	tablero->hacerMovimiento(0, 'b');
+	//tablero->colocarFicha(0, 0, 'a');
 	tablero->mostrarTabla();
 	
 	if (tablero->conectaCuatro('a'))

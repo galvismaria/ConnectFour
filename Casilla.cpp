@@ -8,6 +8,10 @@ Casilla::Casilla(char ficha){
 	this->ficha = ficha;
 }
 
+void Casilla::setFicha(char ficha){
+	this->ficha = ficha;
+}
+
 char Casilla::getFicha(){
 	return ficha;
 }

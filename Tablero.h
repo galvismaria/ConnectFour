@@ -6,8 +6,8 @@
 #include <string>
 #include "Casilla.h"
 
-#define ANCHO 7
-#define ALTO 6
+#define COLUMNAS 7
+#define FILAS 6
 
 /*
 
@@ -22,7 +22,7 @@ class Tablero{
 	
 	private:
 		
-		Casilla* tabla[ANCHO][ALTO];
+		Casilla* tabla[FILAS][COLUMNAS];
 		
 	public:
 		
