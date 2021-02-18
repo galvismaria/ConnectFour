@@ -72,7 +72,7 @@ bool Tablero::conectaCuatro(int fila, int columna) {
 	
 	while ( i < 4 && !conectados){
 		
-		if ( enLinea (fila, columna, i) >= 4)
+		if ( enLinea (fila, columna, i) > 4)
 			conectados == true;
 			
 		else
@@ -82,6 +82,14 @@ bool Tablero::conectaCuatro(int fila, int columna) {
 	return conectados;
 }
 
+bool Tablero::casillaOcupada(int fila, int columna){
+	
+	if (tabla[fila][columna]->getFicha() == 'a' || tabla[fila][columna]->getFicha() == 'b')
+		return true;
+	else
+		return false;
+}
+
 int Tablero::enLinea(int fila, int columna, int direccion) {
 	
 	int seguidos = 1;
@@ -89,14 +97,16 @@ int Tablero::enLinea(int fila, int columna, int direccion) {
 	int i = fila + coordFilas[direccion];
 	int j = columna + coordColumnas[direccion];
 	
-	if (enRango(i, j)){
+	while (enRango(i, j) && (tabla[fila][columna]->getFicha() == tabla[i][j]->getFicha())){
 		
-		cout <<"lol";
-		return seguidos;
+		seguidos++;
+		
+		i = i + coordFilas[direccion];
+		j = j + coordColumnas[direccion];
 	}
 	
-	i = i - coordFilas[direccion];
-	j = j - coordColumnas[direccion];
+	i = fila - coordFilas[direccion];
+	j = columna - coordColumnas[direccion];
 	
 	while (enRango(i, j) && (tabla[fila][columna]->getFicha() == tabla[i][j]->getFicha())){
 		

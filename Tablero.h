@@ -61,6 +61,7 @@ class Tablero{
 		void mostrarTabla();
 		int obtenerFilaDesocupada(int columna);
 		void colocarFicha(int columna, int fila, char ficha);
+		bool casillaOcupada(int fila, int columna);
 		bool enRango(int columna, int fila);
 		bool conectaCuatro(int fila, int columna);
 		int enLinea(int fila, int columna, int direccion);
