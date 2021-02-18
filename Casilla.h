@@ -26,7 +26,9 @@ class Casilla{
 	public:
 		
 		Casilla();
-		setFicha(char equipo);
+		Casilla(char ficha);
+		char getFicha();
+		void setFicha(char equipo);
 		~Casilla();
 	
 };

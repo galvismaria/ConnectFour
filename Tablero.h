@@ -27,17 +27,14 @@ class Tablero{
 	public:
 		
 		Tablero();
-<<<<<<< Updated upstream
 		obtenerFilaDesocupada();
 		colocarFichaEn(int columna);
-=======
 		void mostrarTabla();
 		int obtenerFilaDesocupada(int columna);
 		void colocarFicha(int columna, int fila, char ficha);
 		bool casillaOcupada(int fila, int columna);
 		bool enRango(int columna, int fila);
 		bool conectaCuatro(char equipo);
->>>>>>> Stashed changes
 		~Tablero();
 };
 

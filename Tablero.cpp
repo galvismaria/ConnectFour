@@ -11,8 +11,6 @@ Tablero::Tablero(){
 		}
 	}
 }
-<<<<<<< Updated upstream
-=======
 
 void Tablero::mostrarTabla(){
 	
@@ -108,4 +106,3 @@ bool Tablero::conectaCuatro(char equipo){
     }
     return false;
 }
->>>>>>> Stashed changes
