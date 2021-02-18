@@ -39,13 +39,14 @@ void Juego::menuPrincipal(){
 			case(4):
 				salir();					
 				break;
+			default:
+				break;
 		}
 		
 }
 
 void Juego::iniciarPartida(){
 	partida = new Partida();
-	
 	partida->mostrarDisplay();
 }
 	
@@ -55,3 +56,7 @@ void Juego::salir()
 	{
 		exit(0);
 	}
+	
+Juego::~Juego(){
+	delete [] partida;
+}

@@ -40,22 +40,27 @@ void Tablero::mostrarTabla(){
 
 int Tablero::obtenerFilaDesocupada(int columna){
 	
-	for (int i = ALTO ; i > 0 ; i--){
+	cout << "tt";
+	
+	for (int i = ALTO-1 ; i >= 0 ; i--){
 		
-		if (tabla[i][columna]->getFicha() == '\0')
+		if (tabla[i][columna]->getFicha() == '\0'){
 			return i;
+		
+		}
 	}
 	
 	return -1;
-}
-
-void Tablero::colocarFicha(int columna, int fila, char ficha){
-	
-	tabla[columna][fila] = new Casilla(ficha);
 	
 }
 
-bool Tablero::enRango(int columna, int fila) {
+void Tablero::colocarFicha(int fila, int columna, char ficha){
+	
+	tabla[fila][columna] = new Casilla(ficha);
+	
+}
+
+bool Tablero::enRango(int fila, int columna) {
 	
 	if ((columna >= 0 && columna < ANCHO) && (fila >= 0 && fila < ALTO))
 		return true;
@@ -105,4 +110,26 @@ bool Tablero::conectaCuatro(char equipo){
         }
     }
     return false;
+}
+
+void Tablero::hacerMovimiento(int columna, char ficha){
+	
+	columna--;
+	int fila = obtenerFilaDesocupada(columna);
+	
+	if (fila == -1){
+		cout << "Error";
+		return;
+	}
+	
+	if (!casillaOcupada(fila, columna) && enRango(fila, columna)){
+		colocarFicha(fila, columna, ficha);
+	}
+	
+	return;
+	
+}
+
+Tablero::~Tablero(){
+	;
 }

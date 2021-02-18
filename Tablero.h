@@ -27,14 +27,14 @@ class Tablero{
 	public:
 		
 		Tablero();
-		obtenerFilaDesocupada();
 		colocarFichaEn(int columna);
 		void mostrarTabla();
 		int obtenerFilaDesocupada(int columna);
-		void colocarFicha(int columna, int fila, char ficha);
+		void colocarFicha(int fila, int columna, char ficha);
 		bool casillaOcupada(int fila, int columna);
-		bool enRango(int columna, int fila);
+		bool enRango(int fila, int columna);
 		bool conectaCuatro(char equipo);
+		void hacerMovimiento(int columna, char ficha);
 		~Tablero();
 };
 

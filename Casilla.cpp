@@ -11,3 +11,7 @@ Casilla::Casilla(char ficha){
 char Casilla::getFicha(){
 	return ficha;
 }
+
+Casilla::~Casilla(){
+	;
+}
