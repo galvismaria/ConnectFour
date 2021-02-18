@@ -78,31 +78,31 @@ bool Tablero::casillaOcupada(int fila, int columna){
 bool Tablero::conectaCuatro(char equipo){
 
     // horizontal Check 
-    for (int j = 0; j < FILAS - 3 ; j++ ){
-        for ( int i = 0; i < COLUMNAS ; i++ ){
+    for (int j = 0; j < COLUMNAS - 3 ; j++ ){
+        for ( int i = 0; i < FILAS ; i++ ){
             if ( tabla[i][j]->getFicha() == equipo && tabla[i][j+1]->getFicha() == equipo && tabla[i][j+2]->getFicha() == equipo && tabla[i][j+3]->getFicha() == equipo ){
                 return true;
             }           
         }
     }
     // verticalCheck
-    for ( int i = 0; i < COLUMNAS-3 ; i++ ){
-        for ( int j = 0; j < FILAS ; j++ ){
+    for ( int i = 0; i < FILAS-3 ; i++ ){
+        for ( int j = 0; j < COLUMNAS ; j++ ){
             if ( tabla [i][j]->getFicha() == equipo && tabla[i+1][j]->getFicha() == equipo && tabla[i+2][j]->getFicha() == equipo && tabla[i+3][j]->getFicha() == equipo ){
                 return true;
             }           
         }
     }
     // ascendingDiagonalCheck 
-    for ( int i = 3; i < COLUMNAS ; i++ ){
-        for ( int j = 0; j < FILAS - 3; j++ ){
+    for ( int i = 3; i < FILAS ; i++ ){
+        for ( int j = 0; j < COLUMNAS - 3; j++ ){
             if ( tabla[i][j]->getFicha() == equipo && tabla[i-1][j+1]->getFicha() == equipo && tabla[i-2][j+2]->getFicha() == equipo && tabla[i-3][j+3]->getFicha() == equipo )
                 return true;
         }
     }
     // descendingDiagonalCheck
-    for ( int i=3; i < COLUMNAS ; i++ ){
-        for ( int j = 3 ; j < FILAS ; j++ ){
+    for ( int i=3; i < FILAS ; i++ ){
+        for ( int j = 3 ; j < COLUMNAS ; j++ ){
             if ( tabla [i][j]->getFicha() == equipo && tabla [i-1][j-1]->getFicha() == equipo && tabla[i-2][j-2]->getFicha() == equipo && tabla[i-3][j-3]->getFicha() == equipo)
                 return true;
         }

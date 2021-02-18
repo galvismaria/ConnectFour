@@ -18,15 +18,20 @@ void Partida::mostrarDisplay(){
 			cout << " |   |";
 		}
 	}*/
-	tablero->hacerMovimiento(6, 'a');
-	tablero->hacerMovimiento(0, 'a');
-	tablero->hacerMovimiento(0, 'b');
+	tablero->hacerMovimiento(5, 'a');
+	tablero->hacerMovimiento(5, 'a');
+	tablero->hacerMovimiento(5, 'a');
+	tablero->hacerMovimiento(5, 'a');
+	tablero->hacerMovimiento(5, 'a');
 	//tablero->colocarFicha(0, 0, 'a');
 	tablero->mostrarTabla();
 	
-	if (tablero->conectaCuatro('a'))
+	if (tablero->conectaCuatro('a')){
 		cout<<"\n\n en linea";	
-		cout <<"\t\t\t\t\n";
+	}
+	else
+	cout<<"no";
+	cout <<"\t\t\t\t\n";
 	
 }
 
