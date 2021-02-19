@@ -37,12 +37,10 @@ bool Partida::empate(){
 bool Partida::finPartida(){
 	
 	if (tablero->conectaCuatro(jugadorA->getEquipo())){
-		cout<<"\n\t\t\t¡El ganador es el Equipo X!\n\t\t\t";
 		return true;
 	}
 	
 	if (tablero->conectaCuatro(jugadorB->getEquipo())){
-		cout<<"\n\t\t\t¡El ganador es el Equipo O!\n\t\t\t";
 		return true;
 	}
 		

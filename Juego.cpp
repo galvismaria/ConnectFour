@@ -50,15 +50,25 @@ void Juego::iniciarPartida(){
 	
 	partida->mostrarDisplay();
 	
-	while (true) 
-			{
-				while (!jugarTurnoDe(partida->getJugadorA()));
-				while (!jugarTurnoDe(partida->getJugadorB()));
-			}
-			cout << "\n\n\tEL JUEGO HA TERMINADO\n";
-			system("pause");
-			system("cls");
-			menuPrincipal();
+	bool flag = false;
+	
+	while(!partida->finPartida()){
+		while (!jugarTurnoDe(partida->getJugadorA()));
+		while (!jugarTurnoDe(partida->getJugadorB()));
+	}
+	
+	if (partida->getTablero()->conectaCuatro(partida->getJugadorA()->getEquipo())){
+		cout<<"\n\t\t\t¡El ganador es el Equipo X!\n\t\t\t";	
+	}
+	
+	if (partida->getTablero()->conectaCuatro(partida->getJugadorB()->getEquipo())){
+		cout<<"\n\t\t\t¡El ganador es el Equipo O!\n\t\t\t";	
+	}
+	
+	cout << "\n\n\t\t\tG A M E  O V E R\n\n\t\t\t";
+	system("pause");
+	system("cls");
+	menuPrincipal();
 }
 	
 bool Juego::jugarTurnoDe(Jugador* jugador){
@@ -71,13 +81,9 @@ bool Juego::jugarTurnoDe(Jugador* jugador){
 	partida->getJugadorB()->mostrarFichas();
 	
 	int columna;
+	bool flag = false;
 	
-	while(true){
-
-		if (partida->finPartida()){
-			system("pause");
-			salir();
-		}
+	while(!partida->finPartida()){
 		
 		cout << "\n\t\t\tTurno de ";
 		if (jugador->getEquipo() == 'a'){
@@ -112,6 +118,8 @@ bool Juego::jugarTurnoDe(Jugador* jugador){
 			cin.ignore(100, '\n');
 		}
 	}
+	
+	return true;
 	
 }
 		
