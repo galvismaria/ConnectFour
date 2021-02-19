@@ -7,6 +7,8 @@
 #include "Tablero.h"
 #include "Jugador.h"
 
+#define FICHAS 21
+
 using namespace std;
 
 class Partida{
@@ -19,9 +21,17 @@ class Partida{
 		
 		
 	public:
-		
+		// Constructores
 		Partida();
+		
+		// Getters
+		Jugador* getJugadorA();
+		Jugador* getJugadorB();
+		Tablero* getTablero();
+		
 		void mostrarDisplay();
+		bool empate();
+		bool finPartida();
 		~Partida();
 	
 };

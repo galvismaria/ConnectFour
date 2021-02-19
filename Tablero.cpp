@@ -110,21 +110,21 @@ bool Tablero::conectaCuatro(char equipo){
     return false;
 }
 
-void Tablero::hacerMovimiento(int columna, char ficha){
+bool Tablero::hacerMovimiento(int columna, char ficha){
 	
 	int fila = obtenerFilaDesocupada(columna);
 	
 	
 	if (fila == -1){
-		cout << "Error";
-		return;
+		return false;
 	}
 	
 	if (enRango(fila, columna)){
 		colocarFicha(fila, columna, ficha);
+		return true;
 	}
 	
-	return;
+	return false;
 	
 }
 

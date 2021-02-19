@@ -20,6 +20,7 @@ class Juego{
 		Juego();
 		void menuPrincipal();
 		void iniciarPartida();
+		bool jugarTurnoDe(Jugador* jugador);
 		void salir();
 		~Juego();
 	

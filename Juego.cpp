@@ -47,10 +47,73 @@ void Juego::menuPrincipal(){
 
 void Juego::iniciarPartida(){
 	partida = new Partida();
+	
 	partida->mostrarDisplay();
+	
+	while (true) 
+			{
+				while (!jugarTurnoDe(partida->getJugadorA()));
+				while (!jugarTurnoDe(partida->getJugadorB()));
+			}
+			cout << "\n\n\tEL JUEGO HA TERMINADO\n";
+			system("pause");
+			system("cls");
+			menuPrincipal();
 }
 	
+bool Juego::jugarTurnoDe(Jugador* jugador){
 	
+	partida->mostrarDisplay();
+	
+	cout << endl;
+	
+	partida->getJugadorA()->mostrarFichas();
+	partida->getJugadorB()->mostrarFichas();
+	
+	int columna;
+	
+	while(true){
+
+		if (partida->finPartida()){
+			system("pause");
+			salir();
+		}
+		
+		cout << "\n\t\t\tTurno de ";
+		if (jugador->getEquipo() == 'a'){
+			cout << "Equipo X";
+		}
+		
+		if (jugador->getEquipo() == 'b'){
+			cout << "Equipo O";
+		}
+		
+		cout << "\n\n\t\t\tColocar ficha en columna: ";
+		cin >> columna;
+		columna = columna-1;
+		
+		if (columna >= 0 && columna < 7){
+			
+			if (partida->getTablero()->hacerMovimiento(columna, jugador->getEquipo())){
+				jugador->perderFicha();
+				return true;
+			}
+			
+			else {
+				cout << "\n\t\t\tMovimiento invalido\n\n";
+				system("pause");
+				return false;
+			}
+		} 
+		
+		else {
+			cout << "\n\t\t\tError, intente de nuevo.\n";
+			cin.clear();
+			cin.ignore(100, '\n');
+		}
+	}
+	
+}
 		
 void Juego::salir() 
 	{

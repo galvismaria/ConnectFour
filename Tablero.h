@@ -34,7 +34,7 @@ class Tablero{
 		bool casillaOcupada(int fila, int columna);
 		bool enRango(int fila, int columna);
 		bool conectaCuatro(char equipo);
-		void hacerMovimiento(int columna, char ficha);
+		bool hacerMovimiento(int columna, char ficha);
 		~Tablero();
 };
 

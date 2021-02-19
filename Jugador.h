@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <string>
 
+#define FICHAS 21
+
 using namespace std;
 
 class Jugador{
@@ -17,8 +19,22 @@ class Jugador{
 		
 	public:
 		
-		Jugador();
+		// Constructores
+		Jugador(char equipo, int fichasRestantes);
+		
+		// Getters
+		char getEquipo();
+		int getFichasRestantes();
+		
+		// Setters
+		void setEquipo(char equipo);
+		void setFichasRestantes(int fichasRestantes);
+		
 		void mostrarFichas();
+		bool sinFichas();
+		void perderFicha();
+	
+		// Destructor
 		~Jugador();
 	
 };
