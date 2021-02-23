@@ -1,11 +1,13 @@
 #include "Computador.h"
 
 Computador::Computador(Tablero *original, char equipo){
-	clonarMatriz(original);
+	
+	copiaTablero = new Tablero();
+	this->original = original;	
 	this->equipo = equipo;
 }
 
-void Computador::clonarMatriz(Tablero* original) {
+void Computador::clonarMatriz() {
 	
     for (int i = 0 ; i < FILAS ; i++){
 		
@@ -17,9 +19,14 @@ void Computador::clonarMatriz(Tablero* original) {
 	}
 }
 
+void Computador::setTableroActual(Tablero *original){
+	this->original = original;
+}
+
 int Computador::getColumnaGanadora(char equipo){
 	
 	for (int i = 0 ; i < COLUMNAS ; i++){
+		clonarMatriz();
 		if (copiaTablero->hacerMovimiento(i, equipo))
 			if (copiaTablero->conectaCuatro(equipo))
 				return i;
@@ -45,6 +52,8 @@ void Computador::getMejorColumna(char equipo, int *conteo, int *indice){
 	int iColumnaMayor = -1;
 	
 	for (int i = 0 ; i < COLUMNAS ; i++){
+		
+		clonarMatriz();
 		
 		if (copiaTablero->hacerMovimiento(i, equipo)){
 			
@@ -99,7 +108,9 @@ int Computador::getColumnaRandom(char equipo){
 	
 	while (!flag){
 		
+		clonarMatriz();
 		int columna = randomEnRango(0, COLUMNAS - 1);
+		
 		if (copiaTablero->hacerMovimiento(columna, equipo)){
 			flag = true;
 			return columna;	
@@ -112,6 +123,8 @@ int Computador::getColumnaRandom(char equipo){
 }
 
 int Computador::getColumnaCentral(char equipo){
+	
+	clonarMatriz();
 	
 	if (copiaTablero->hacerMovimiento( (COLUMNAS -1 ) / 2, equipo)){
 		return (COLUMNAS -1 ) / 2;
@@ -186,4 +199,8 @@ int Computador::movimiento(){
 	columna = elegirColumna(equipo, getOponente());
 	return columna;
 	
+}
+
+bool Computador::esComputador(){
+	return true;
 }

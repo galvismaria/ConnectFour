@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string>
 #include "Global.h"
+#include "Tablero.h"
 
 using namespace std;
 
@@ -38,6 +39,8 @@ class Jugador{
 		void perderFicha();
 		
 		virtual int movimiento() = 0;
+		virtual bool esComputador() = 0;
+		virtual void setTableroActual (Tablero *original) = 0;
 	
 		// Destructor
 		~Jugador();

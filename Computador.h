@@ -13,10 +13,12 @@ class Computador : public Jugador{
 	
 	private:
 		Tablero *copiaTablero;
+		Tablero *original;
 		
 	public:
 		Computador(Tablero *original, char equipo);
-		void clonarMatriz(Tablero* original);
+		void clonarMatriz();
+		void setTableroActual(Tablero *original);
 		int getColumnaGanadora(char equipo);
 		int getUltimaFila(int columna);
 		void getMejorColumna(char equipo, int *conteo, int *indice);
@@ -25,6 +27,7 @@ class Computador : public Jugador{
 		int getColumnaCentral(char equipo);
 		int elegirColumna(char equipo, char oponente);
 		int movimiento();
+		bool esComputador();
 };
 
 #endif

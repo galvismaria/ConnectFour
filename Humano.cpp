@@ -14,3 +14,7 @@ int Humano::movimiento(){
 	return columna;
 	
 }
+
+bool Humano::esComputador(){
+	return false;
+}

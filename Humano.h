@@ -13,6 +13,8 @@ class Humano : public Jugador{
 	public:
 		Humano(char equipo);
 		int movimiento();
+		void setTableroActual(Tablero *original){};
+		bool esComputador();
 };
 
 #endif

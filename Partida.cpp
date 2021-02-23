@@ -2,25 +2,23 @@
 
 Partida::Partida(){
 	tablero = new Tablero();
-	jugador1 = new Humano(JUGADOR_1);
-	jugador2 = new Humano(JUGADOR_2);
+	jugador1 = NULL;
+	jugador2 = NULL;
 	
 }
 
 void Partida::HumanoVsHumano(){
-	tablero = new Tablero();
+	
 	jugador1 = new Humano(JUGADOR_1);
 	jugador2 = new Humano(JUGADOR_2);
 }
 
 void Partida::HumanoVsComputador(){
-	tablero = new Tablero();
 	jugador1 = new Humano(JUGADOR_1);
 	jugador2 = new Computador(tablero, JUGADOR_2);
 }
 
 void Partida::ComputadorVsComputador(){
-	tablero = new Tablero();
 	jugador1 = new Computador(tablero, JUGADOR_1);
 	jugador2 = new Computador(tablero, JUGADOR_2);
 }
