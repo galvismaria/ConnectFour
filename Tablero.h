@@ -5,10 +5,7 @@
 #include <stdio.h>
 #include <string>
 #include "Casilla.h"
-
-#define COLUMNAS 7
-#define FILAS 6
-#define CONECTA 4
+#include "Global.h"
 
 /*
 

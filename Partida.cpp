@@ -2,16 +2,35 @@
 
 Partida::Partida(){
 	tablero = new Tablero();
-	jugadorA = new Jugador('a', FICHAS);
-	jugadorB = new Jugador('b', FICHAS);
+	jugador1 = new Humano(JUGADOR_1);
+	jugador2 = new Humano(JUGADOR_2);
+	
 }
 
-Jugador* Partida::getJugadorA(){
-	return jugadorA;
+void Partida::HumanoVsHumano(){
+	tablero = new Tablero();
+	jugador1 = new Humano(JUGADOR_1);
+	jugador2 = new Humano(JUGADOR_2);
 }
 
-Jugador* Partida::getJugadorB(){
-	return jugadorB;
+void Partida::HumanoVsComputador(){
+	tablero = new Tablero();
+	jugador1 = new Humano(JUGADOR_1);
+	jugador2 = new Computador(tablero, JUGADOR_2);
+}
+
+void Partida::ComputadorVsComputador(){
+	tablero = new Tablero();
+	jugador1 = new Computador(tablero, JUGADOR_1);
+	jugador2 = new Computador(tablero, JUGADOR_2);
+}
+
+Jugador* Partida::getJugador1(){
+	return jugador1;
+}
+
+Jugador* Partida::getJugador2(){
+	return jugador2;
 }
 
 Tablero* Partida::getTablero(){
@@ -21,13 +40,12 @@ Tablero* Partida::getTablero(){
 void Partida::mostrarDisplay(){
 	
 	system("cls");
-	
 	tablero->mostrarTabla();
 	
 }
 
 bool Partida::empate(){
-	if ((jugadorA->sinFichas() & jugadorB->sinFichas()) && (!tablero->conectaCuatro(jugadorA->getEquipo()) && !tablero->conectaCuatro(jugadorB->getEquipo())))
+	if ((jugador1->sinFichas() & jugador2->sinFichas()) && (!jugador1->esGanador() && !jugador2->esGanador()))
 		return true;
 		
 	else
@@ -36,20 +54,24 @@ bool Partida::empate(){
 
 bool Partida::finPartida(){
 	
-	if (tablero->conectaCuatro(jugadorA->getEquipo())){
+	if (empate()){
+		jugador1->setResultado(false);
+		jugador2->setResultado(false);
 		return true;
 	}
 	
-	if (tablero->conectaCuatro(jugadorB->getEquipo())){
+	jugador1->setResultado(tablero->conectaCuatro(jugador1->getEquipo()));
+	jugador2->setResultado(tablero->conectaCuatro(jugador2->getEquipo()));
+	
+	if (jugador1->esGanador() || jugador2->esGanador())
 		return true;
-	}
-		
+	
 	else
 		return false;
 }
 
 Partida::~Partida(){
 	delete [] tablero;
-	delete [] jugadorA;
-	delete [] jugadorB;
+	delete [] jugador1;
+	delete [] jugador2;
 }

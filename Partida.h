@@ -4,8 +4,13 @@
 #include <iostream>
 #include <stdio.h>
 #include <string>
+#include <stdlib.h>
+#include <time.h>
 #include "Tablero.h"
 #include "Jugador.h"
+#include "Computador.h"
+#include "Humano.h"
+#include "Global.h"
 
 #define FICHAS 21
 
@@ -16,8 +21,8 @@ class Partida{
 	private:
 		
 		Tablero* tablero;
-		Jugador* jugadorA;
-		Jugador* jugadorB;
+		Jugador* jugador1;
+		Jugador* jugador2;
 		
 		
 	public:
@@ -25,10 +30,13 @@ class Partida{
 		Partida();
 		
 		// Getters
-		Jugador* getJugadorA();
-		Jugador* getJugadorB();
+		Jugador* getJugador1();
+		Jugador* getJugador2();
 		Tablero* getTablero();
 		
+		void HumanoVsHumano();
+		void HumanoVsComputador();
+		void ComputadorVsComputador();
 		void mostrarDisplay();
 		bool empate();
 		bool finPartida();

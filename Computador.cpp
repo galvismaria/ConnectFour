@@ -1,3 +1,10 @@
+#include "Computador.h"
+
+Computador::Computador(Tablero *original, char equipo){
+	clonarMatriz(original);
+	this->equipo = equipo;
+}
+
 void Computador::clonarMatriz(Tablero* original) {
 	
     for (int i = 0 ; i < FILAS ; i++){
@@ -13,8 +20,8 @@ void Computador::clonarMatriz(Tablero* original) {
 int Computador::getColumnaGanadora(char equipo){
 	
 	for (int i = 0 ; i < COLUMNAS ; i++){
-		if (copiaTablero->hacerMovimiento(i, char equipo))
-			if (copiaTabero->conectaCuatro(char equipo))
+		if (copiaTablero->hacerMovimiento(i, equipo))
+			if (copiaTablero->conectaCuatro(equipo))
 				return i;
 	}
 	
@@ -31,11 +38,6 @@ int Computador::getUltimaFila(int columna){
 	
 	return -1;
 }
-
-/*
- * Los dos últimos apuntadores son porque no podemos regresar dos variables
- * */
- 
  
 void Computador::getMejorColumna(char equipo, int *conteo, int *indice){
 	
@@ -82,11 +84,10 @@ void Computador::getMejorColumna(char equipo, int *conteo, int *indice){
 		
 	}
 	
-	conteo = contMayor;
-	indice = iColumnaMayor;
+	*conteo = contMayor;
+	*indice = iColumnaMayor;
 	
 }
- 
 
 int Computador::randomEnRango(int minimo, int maximo) {
     return minimo + rand() / (RAND_MAX / (maximo - minimo + 1) + 1);
@@ -119,7 +120,6 @@ int Computador::getColumnaCentral(char equipo){
 	return -1;
 }
 
-
 int Computador::elegirColumna(char equipo, char oponente){
 	
 	int posibleResultado = getColumnaGanadora(equipo);
@@ -147,7 +147,7 @@ int Computador::elegirColumna(char equipo, char oponente){
 	
 	int conteoOponente, columnaOponente;
 	
-	getMejorColumna(ponente, &conteoOponente, &columnaOponente);
+	getMejorColumna(oponente, &conteoOponente, &columnaOponente);
 	
 	if (conteoOponente > conteoCpu){
 		
@@ -177,5 +177,13 @@ int Computador::elegirColumna(char equipo, char oponente){
 	
 	printf("Esto no debería suceder\n");
     return 0;
+	
+}
+
+int Computador::movimiento(){
+	
+	int columna;
+	columna = elegirColumna(equipo, getOponente());
+	return columna;
 	
 }

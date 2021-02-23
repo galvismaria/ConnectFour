@@ -30,11 +30,19 @@ void Juego::menuPrincipal(){
 		switch (opcion) 
 		{
 			case(1):
+				partida = new Partida();
+				partida->HumanoVsHumano();
 				iniciarPartida(); 						
 				break;
 			case(2):
+				partida = new Partida();
+				partida->HumanoVsComputador();
+				iniciarPartida(); 
 				break;						
-			case(3):					
+			case(3):
+				partida = new Partida();
+				partida->ComputadorVsComputador();
+				iniciarPartida(); 					
 				break;
 			case(4):
 				salir();					
@@ -46,39 +54,44 @@ void Juego::menuPrincipal(){
 }
 
 void Juego::iniciarPartida(){
-	partida = new Partida();
 	
 	partida->mostrarDisplay();
 	
 	bool flag = false;
 	
 	while(!partida->finPartida()){
-		while (!jugarTurnoDe(partida->getJugadorA()));
-		while (!jugarTurnoDe(partida->getJugadorB()));
+		while (!jugarTurnoDe(partida->getJugador1()));
+		while (!jugarTurnoDe(partida->getJugador2()));
 	}
 	
-	if (partida->getTablero()->conectaCuatro(partida->getJugadorA()->getEquipo())){
-		cout<<"\n\t\t\t¡El ganador es el Equipo X!\n\t\t\t";	
+	
+	if (partida->getJugador1()->esGanador()){
+		cout<<"\n\t\t\t¡El ganador es el Jugador 1!\n\t\t\t";	
 	}
 	
-	if (partida->getTablero()->conectaCuatro(partida->getJugadorB()->getEquipo())){
-		cout<<"\n\t\t\t¡El ganador es el Equipo O!\n\t\t\t";	
+	if (partida->getJugador2()->esGanador()){
+		cout<<"\n\t\t\t¡El ganador es el Jugador 2!\n\t\t\t";	
 	}
 	
-	cout << "\n\n\t\t\tG A M E  O V E R\n\n\t\t\t";
+	if (partida->empate()){
+		cout << "\n\t\t\t¡Es un empate!";
+	}
+	
+	
+	cout << "\n\n\t\t\tFin del Juego\n\n\t\t\t";
 	system("pause");
 	system("cls");
 	menuPrincipal();
 }
-	
+
 bool Juego::jugarTurnoDe(Jugador* jugador){
 	
 	partida->mostrarDisplay();
 	
 	cout << endl;
 	
-	partida->getJugadorA()->mostrarFichas();
-	partida->getJugadorB()->mostrarFichas();
+	partida->getJugador1()->mostrarFichas();
+	partida->getJugador2()->mostrarFichas();
 	
 	int columna;
 	bool flag = false;
@@ -86,17 +99,17 @@ bool Juego::jugarTurnoDe(Jugador* jugador){
 	while(!partida->finPartida()){
 		
 		cout << "\n\t\t\tTurno de ";
-		if (jugador->getEquipo() == 'a'){
-			cout << "Equipo X";
+		if (jugador->getEquipo() == JUGADOR_1){
+			cout << "Jugador 1";
 		}
 		
-		if (jugador->getEquipo() == 'b'){
-			cout << "Equipo O";
+		if (jugador->getEquipo() == JUGADOR_2){
+			cout << "Jugador 2";
 		}
+		
 		
 		cout << "\n\n\t\t\tColocar ficha en columna: ";
-		cin >> columna;
-		columna = columna-1;
+		columna = jugador->movimiento();
 		
 		if (columna >= 0 && columna < 7){
 			

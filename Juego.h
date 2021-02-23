@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string>
 #include "Partida.h"
+#include "Global.h"
 
 using namespace std;
 

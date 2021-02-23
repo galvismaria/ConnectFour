@@ -1,8 +1,9 @@
 #include "Jugador.h"
 
-Jugador::Jugador(char equipo, int fichasRestantes){
-	this->equipo = equipo;
-	this->fichasRestantes = FICHAS;
+Jugador::Jugador(){
+	equipo = '\0';
+	fichasRestantes = FICHAS;
+	ganador = false;
 }
 
 char Jugador::getEquipo(){
@@ -13,6 +14,10 @@ int Jugador::getFichasRestantes(){
 	return fichasRestantes;
 }
 
+bool Jugador::esGanador(){
+	return ganador;
+}
+
 void Jugador::setEquipo(char equipo){
 	this->equipo = equipo;
 }
@@ -21,15 +26,29 @@ void Jugador::setFichasRestantes(int fichasRestantes){
 	this->fichasRestantes = fichasRestantes;
 }
 
+void Jugador::setResultado(bool resultado){
+	ganador = resultado;
+}
+
+char Jugador::getOponente(){
+	
+	if (this->equipo == JUGADOR_1)
+		return JUGADOR_2;
+	
+	if (this->equipo == JUGADOR_2)
+		return JUGADOR_1;
+	else
+		return '\0';
+}
 
 void Jugador::mostrarFichas(){
 	
-	if(equipo == 'a'){
-		cout << "\n\t\t\t(Equipo X) ";
+	if(equipo == JUGADOR_1){
+		cout << "\n\t\t\t(Jugador 1) ";
 	}
 	
-	if(equipo == 'b'){
-		cout << "\n\t\t\t(Equipo O) ";
+	if(equipo == JUGADOR_2){
+		cout << "\n\t\t\t(Jugador 2) ";
 	}
 	
 	cout <<"Piezas restantes: "<< fichasRestantes;
@@ -37,8 +56,10 @@ void Jugador::mostrarFichas(){
 }
 
 bool Jugador::sinFichas(){
-	if (fichasRestantes >= 0)
+	
+	if (fichasRestantes <= 0)
 		return true;
+		
 	else
 		return false;
 }

@@ -4,35 +4,40 @@
 #include <iostream>
 #include <stdio.h>
 #include <string>
-
-#define FICHAS 21
+#include "Global.h"
 
 using namespace std;
 
 class Jugador{
 	
-	private:
+	protected:
 		
 		char equipo;
 		int fichasRestantes;
+		bool ganador;
 		
 		
 	public:
 		
 		// Constructores
-		Jugador(char equipo, int fichasRestantes);
+		Jugador();
 		
 		// Getters
 		char getEquipo();
 		int getFichasRestantes();
+		bool esGanador();
 		
 		// Setters
 		void setEquipo(char equipo);
 		void setFichasRestantes(int fichasRestantes);
+		void setResultado(bool resultado);
 		
+		char getOponente();
 		void mostrarFichas();
 		bool sinFichas();
 		void perderFicha();
+		
+		virtual int movimiento() = 0;
 	
 		// Destructor
 		~Jugador();
