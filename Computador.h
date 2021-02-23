@@ -10,6 +10,7 @@
 #include "Jugador.h"
 
 class Computador : public Jugador{
+
 	
 	private:
 		Tablero *copiaTablero;
@@ -18,6 +19,7 @@ class Computador : public Jugador{
 	public:
 		Computador(Tablero *original, char equipo);
 		void clonarMatriz();
+		void vaciarMatriz();
 		void setTableroActual(Tablero *original);
 		int getColumnaGanadora(char equipo);
 		int getUltimaFila(int columna);
@@ -28,6 +30,8 @@ class Computador : public Jugador{
 		int elegirColumna(char equipo, char oponente);
 		int movimiento();
 		bool esComputador();
+		
+
 };
 
 #endif

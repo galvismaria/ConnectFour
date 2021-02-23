@@ -19,6 +19,10 @@ void Computador::clonarMatriz() {
 	}
 }
 
+void Computador::vaciarMatriz(){
+	copiaTablero = new Tablero();
+}
+
 void Computador::setTableroActual(Tablero *original){
 	this->original = original;
 }
@@ -29,8 +33,13 @@ int Computador::getColumnaGanadora(char equipo){
 		clonarMatriz();
 		if (copiaTablero->hacerMovimiento(i, equipo))
 			if (copiaTablero->conectaCuatro(equipo))
+			{
+				vaciarMatriz();
 				return i;
+			}
 	}
+	
+	vaciarMatriz();
 	
 	return -1;
 }
@@ -96,6 +105,8 @@ void Computador::getMejorColumna(char equipo, int *conteo, int *indice){
 	*conteo = contMayor;
 	*indice = iColumnaMayor;
 	
+	vaciarMatriz();
+	
 }
 
 int Computador::randomEnRango(int minimo, int maximo) {
@@ -113,11 +124,13 @@ int Computador::getColumnaRandom(char equipo){
 		
 		if (copiaTablero->hacerMovimiento(columna, equipo)){
 			flag = true;
+			vaciarMatriz();
 			return columna;	
 		}
 		
 	}
 	
+	vaciarMatriz();
 	return -1;
 	
 }
@@ -127,9 +140,11 @@ int Computador::getColumnaCentral(char equipo){
 	clonarMatriz();
 	
 	if (copiaTablero->hacerMovimiento( (COLUMNAS -1 ) / 2, equipo)){
+		vaciarMatriz();
 		return (COLUMNAS -1 ) / 2;
 	}
 	
+	vaciarMatriz();
 	return -1;
 }
 
@@ -139,7 +154,7 @@ int Computador::elegirColumna(char equipo, char oponente){
 	
 	if ( posibleResultado != -1 ){
 		
-		printf("*elijo ganar*\n");
+		cout <<"~Elijo ganar~";
 		return posibleResultado;
 		
 	}
@@ -148,7 +163,7 @@ int Computador::elegirColumna(char equipo, char oponente){
 	
 	if ( posibleResultadoOponente != -1 ){
 		
-		 printf("*elijo evitar que mi oponente gane*\n");
+		cout <<"~Elijo evitar que mi oponente gane~";
 		return posibleResultadoOponente;
 		
 	}
@@ -164,31 +179,31 @@ int Computador::elegirColumna(char equipo, char oponente){
 	
 	if (conteoOponente > conteoCpu){
 		
-		printf("*elijo quitarle el puntaje a mi oponente*\n");
+		cout <<"~Elijo quitarle puntaje a mi oponente~";
         return columnaOponente;
         
     }
 	
 	else if (conteoCpu > 1) {
-        printf("*elijo colocarla en donde obtengo un mayor puntaje*\n");
+        cout <<"~Elijo colocarla donde obtengo un mayor puntaje~";
         return columnaCpu;
     }
     
     int columnaCentral = getColumnaCentral(equipo);
     
     if (columnaCentral != -1){
-    	printf("*elijo ponerla en el centro*\n");
+    	cout <<"~Elijo ponerla en el centro~";
         return columnaCentral;
 	}
 	
 	int columna = getColumnaRandom(equipo);
 	
 	if (columna != -1){
-		printf("*elijo la primera vacía aleatoria*\n");
+		cout <<"~Elijo una columna aleatoria~";
         return columna;
 	}
 	
-	printf("Esto no debería suceder\n");
+	cout <<"~Ups, esto no debería pasar~";
     return 0;
 	
 }
@@ -197,6 +212,7 @@ int Computador::movimiento(){
 	
 	int columna;
 	columna = elegirColumna(equipo, getOponente());
+	cout <<" "<< columna;
 	return columna;
 	
 }

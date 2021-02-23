@@ -43,7 +43,7 @@ void Partida::mostrarDisplay(){
 }
 
 bool Partida::empate(){
-	if ((jugador1->sinFichas() & jugador2->sinFichas()) && (!jugador1->esGanador() && !jugador2->esGanador()))
+	if ((jugador1->sinFichas() && jugador2->sinFichas()) && (!jugador1->esGanador() && !jugador2->esGanador()))
 		return true;
 		
 	else

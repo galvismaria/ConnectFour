@@ -37,7 +37,7 @@ void Juego::menuPrincipal(){
 			case(2):
 				partida = new Partida();
 				partida->HumanoVsComputador();
-				cout <<"hola2";
+
 				iniciarPartida(); 
 				break;						
 			case(3):
@@ -57,8 +57,6 @@ void Juego::menuPrincipal(){
 void Juego::iniciarPartida(){
 	
 	partida->mostrarDisplay();
-	
-	bool flag = false;
 	
 	while(!partida->finPartida()){
 		while (!jugarTurnoDe(partida->getJugador1()));
