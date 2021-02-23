@@ -8,6 +8,7 @@
 
 #define COLUMNAS 7
 #define FILAS 6
+#define CONECTA 4
 
 /*
 
@@ -27,14 +28,20 @@ class Tablero{
 	public:
 		
 		Tablero();
-		colocarFichaEn(int columna);
+		void colocarFichaEn(int columna);
 		void mostrarTabla();
 		int obtenerFilaDesocupada(int columna);
+		Casilla* getCasilla(int x, int y);
+		void setCasilla(Casilla* casilla, int x, int y);
 		void colocarFicha(int fila, int columna, char ficha);
 		bool casillaOcupada(int fila, int columna);
 		bool enRango(int fila, int columna);
 		bool conectaCuatro(char equipo);
 		bool hacerMovimiento(int columna, char ficha);
+		int contarArriba(int x, int y, char equipo);
+		int contarDerecha(int x, int y, char equipo);
+		int contarArribaDerecha(int x, int y, char equipo);
+		int contarAbajoDerecha(int x, int y, char equipo);
 		~Tablero();
 };
 

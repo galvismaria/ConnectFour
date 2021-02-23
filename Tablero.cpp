@@ -51,6 +51,15 @@ int Tablero::obtenerFilaDesocupada(int columna){
 	
 }
 
+Casilla* Tablero::getCasilla(int x, int y){
+	return tabla[x][y];
+}
+
+void Tablero::setCasilla(Casilla* casilla, int x, int y){
+	tabla[x][y] = casilla;
+}
+
+
 void Tablero::colocarFicha(int fila, int columna, char ficha){
 	
 	tabla[fila][columna]->setFicha(ficha);
@@ -126,6 +135,84 @@ bool Tablero::hacerMovimiento(int columna, char ficha){
 	
 	return false;
 	
+}
+
+int Tablero::contarArriba(int x, int y, char equipo) {
+	
+    int yInicio = (y - CONECTA >= 0) ? y - CONECTA + 1 : 0;
+    
+    int contador = 0;
+    
+    for (; yInicio <= y; yInicio++) {
+    	
+        if (tabla[yInicio][x]->getFicha() == equipo) {
+            contador++;
+            
+        } else {
+        	
+            contador = 0;
+        }
+    }
+    
+    return contador;
+}
+
+int Tablero::contarDerecha(int x, int y, char equipo) {
+	
+    int xFin = (x + CONECTA < COLUMNAS) ? x + CONECTA - 1 : COLUMNAS - 1;
+    
+    int contador = 0;
+    
+    for (; x <= xFin; x++) {
+        if (tabla[y][x]->getFicha() == equipo) {
+            contador++;
+            
+        } else {
+        	
+            contador = 0;
+        }
+    }
+    return contador;
+}
+
+int Tablero::contarArribaDerecha(int x, int y, char equipo) {
+	
+    int xFin = (x + CONECTA < COLUMNAS) ? x + CONECTA - 1 : COLUMNAS - 1;
+    int yInicio = (y - CONECTA >= 0) ? y - CONECTA + 1 : 0;
+    int contador = 0;
+    
+    while (x <= xFin && yInicio <= y) {
+    	
+        if (tabla[y][x]->getFicha() == equipo) {
+            contador++;
+            
+        } else {
+            contador = 0;
+        }
+        
+        x++;
+        y--;
+    }
+    
+    return contador;
+}
+
+int Tablero::contarAbajoDerecha(int x, int y, char equipo) {
+	
+    int xFin = (x + CONECTA < COLUMNAS) ? x + CONECTA - 1 : COLUMNAS - 1;
+    int yFin = (y + CONECTA < FILAS) ? y + CONECTA - 1 : FILAS - 1;
+    int contador = 0;
+    
+    while (x <= xFin && y <= yFin) {
+        if (tabla[y][x]->getFicha() == jugador) {
+            contador++;
+        } else {
+            contador = 0;
+        }
+        x++;
+        y++;
+    }
+    return contador;
 }
 
 Tablero::~Tablero(){
