@@ -58,10 +58,14 @@ void Juego::iniciarPartida(){
 	
 	partida->mostrarDisplay();
 	
-	while(!partida->finPartida()){
-		while (!jugarTurnoDe(partida->getJugador1()));
-		while (!jugarTurnoDe(partida->getJugador2()));
-	}
+	do{
+		do{
+		}while (!jugarTurnoDe(partida->getJugador1()));
+		
+		do{
+		}while (!jugarTurnoDe(partida->getJugador2()));
+		
+	}while(!partida->finPartida());
 	
 	
 	if (partida->getJugador1()->esGanador()){
@@ -91,8 +95,6 @@ bool Juego::jugarTurnoDe(Jugador* jugador){
 		jugador->setTableroActual(partida->getTablero());	
 	}
 	
-	cout << endl;
-	
 	partida->getJugador1()->mostrarFichas();
 	partida->getJugador2()->mostrarFichas();
 	
@@ -110,13 +112,13 @@ bool Juego::jugarTurnoDe(Jugador* jugador){
 			cout << "Jugador 2";
 		}
 		
-		
 		cout << "\n\n\t\t\tColocar ficha en columna: ";
 		columna = jugador->movimiento();
 		
 		if (columna >= 0 && columna < 7){
 			
 			if (partida->getTablero()->hacerMovimiento(columna, jugador->getEquipo())){
+				partida->mostrarDisplay();
 				jugador->perderFicha();
 				return true;
 			}

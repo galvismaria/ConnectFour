@@ -15,12 +15,12 @@ void Partida::HumanoVsHumano(){
 
 void Partida::HumanoVsComputador(){
 	jugador1 = new Humano(JUGADOR_1);
-	jugador2 = new Computador(tablero, JUGADOR_2);
+	jugador2 = new Computador(JUGADOR_2);
 }
 
 void Partida::ComputadorVsComputador(){
-	jugador1 = new Computador(tablero, JUGADOR_1);
-	jugador2 = new Computador(tablero, JUGADOR_2);
+	jugador1 = new Computador(JUGADOR_1);
+	jugador2 = new Computador(JUGADOR_2);
 }
 
 Jugador* Partida::getJugador1(){
@@ -43,27 +43,32 @@ void Partida::mostrarDisplay(){
 }
 
 bool Partida::empate(){
-	if ((jugador1->sinFichas() && jugador2->sinFichas()) && (!jugador1->esGanador() && !jugador2->esGanador()))
+	/*if ((jugador1->sinFichas() && jugador2->sinFichas()) && (!jugador1->esGanador() && !jugador2->esGanador()))
 		return true;
 		
 	else
-		return false;
+		return false;*/
 }
 
 bool Partida::finPartida(){
 	
-	if (empate()){
+	/*if (empate()){
 		jugador1->setResultado(false);
 		jugador2->setResultado(false);
 		return true;
-	}
+	}*/
 	
-	jugador1->setResultado(tablero->conectaCuatro(jugador1->getEquipo()));
+	/*jugador1->setResultado(tablero->conectaCuatro(jugador1->getEquipo()));
 	jugador2->setResultado(tablero->conectaCuatro(jugador2->getEquipo()));
 	
 	if (jugador1->esGanador() || jugador2->esGanador())
 		return true;
 	
+	else
+		return false;*/
+		
+	if (tablero->conectaCuatro(jugador1->getEquipo()) || tablero->conectaCuatro(jugador2->getEquipo()) )
+		return true;
 	else
 		return false;
 }

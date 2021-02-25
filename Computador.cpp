@@ -1,45 +1,54 @@
 #include "Computador.h"
 
-Computador::Computador(Tablero *original, char equipo){
+Computador::Computador(char equipo){
 	
-	copiaTablero = new Tablero();
-	this->original = original;	
+	estadoActual = new Tablero();
 	this->equipo = equipo;
 }
 
-void Computador::clonarMatriz() {
+void Computador::setTableroActual(Tablero *actual){
 	
-    for (int i = 0 ; i < FILAS ; i++){
+	estadoActual = new Tablero();
+	
+	for (int i = 0 ; i < FILAS ; i++){
 		
 		for (int j = 0 ; j < COLUMNAS ; j++){
 			
-			copiaTablero->setCasilla(original->getCasilla(i, j), i, j);
+			estadoActual->setCasilla(actual->getCasilla(i, j)->getFicha(), i, j);
+			
+		}
+	}
+	
+}
+
+void Computador::copiarTablero(Tablero *origen, Tablero *destino) {
+	
+	for (int i = 0 ; i < FILAS ; i++){
+		
+		for (int j = 0 ; j < COLUMNAS ; j++){
+			
+			destino->setCasilla(origen->getCasilla(i, j)->getFicha(), i, j);
 			
 		}
 	}
 }
 
-void Computador::vaciarMatriz(){
-	copiaTablero = new Tablero();
-}
-
-void Computador::setTableroActual(Tablero *original){
-	this->original = original;
-}
-
 int Computador::getColumnaGanadora(char equipo){
 	
+	Tablero *temp = new Tablero();
+	
 	for (int i = 0 ; i < COLUMNAS ; i++){
-		clonarMatriz();
-		if (copiaTablero->hacerMovimiento(i, equipo))
-			if (copiaTablero->conectaCuatro(equipo))
+		
+		copiarTablero(estadoActual, temp);
+		
+		if (temp->hacerMovimiento(i, equipo))
+		
+			if (temp->conectaCuatro(equipo))
 			{
-				vaciarMatriz();
+				delete temp;
 				return i;
 			}
 	}
-	
-	vaciarMatriz();
 	
 	return -1;
 }
@@ -48,7 +57,7 @@ int Computador::getUltimaFila(int columna){
 	
 	for (int i = 0 ; i < FILAS ; i++){
 		
-		if (copiaTablero->casillaOcupada(i, columna))
+		if (estadoActual->casillaOcupada(i, columna))
 			return i;
 	}
 	
@@ -59,39 +68,40 @@ void Computador::getMejorColumna(char equipo, int *conteo, int *indice){
 	
 	int contMayor = 0;
 	int iColumnaMayor = -1;
+	Tablero *temp = new Tablero();
 	
 	for (int i = 0 ; i < COLUMNAS ; i++){
 		
-		clonarMatriz();
+		copiarTablero(estadoActual, temp);
 		
-		if (copiaTablero->hacerMovimiento(i, equipo)){
+		if (temp->hacerMovimiento(i, equipo)){
 			
 			int filaReciente = getUltimaFila(i);
 			
 			if (filaReciente != -1){
 				
-				int c = copiaTablero->contarArriba(i, filaReciente, equipo);
+				int c = temp->contarArriba(i, filaReciente, equipo);
 				
 				if (c > contMayor){
 					contMayor = c;
 					iColumnaMayor = i;
 				}
 				
-				c = copiaTablero->contarArribaDerecha(i, filaReciente, equipo);
+				c = temp->contarArribaDerecha(i, filaReciente, equipo);
 				
 				if (c > contMayor){
 					contMayor = c;
 					iColumnaMayor = i;
 				}
 				
-				c = copiaTablero->contarDerecha(i, filaReciente, equipo);
+				c = temp->contarDerecha(i, filaReciente, equipo);
 				
 				if (c > contMayor){
 					contMayor = c;
 					iColumnaMayor = i;
 				}
 				
-				c = copiaTablero->contarAbajoDerecha(i, filaReciente, equipo);
+				c = temp->contarAbajoDerecha(i, filaReciente, equipo);
 				
 				if (c > contMayor){
 					contMayor = c;
@@ -104,8 +114,7 @@ void Computador::getMejorColumna(char equipo, int *conteo, int *indice){
 	
 	*conteo = contMayor;
 	*indice = iColumnaMayor;
-	
-	vaciarMatriz();
+	delete temp;
 	
 }
 
@@ -116,35 +125,35 @@ int Computador::randomEnRango(int minimo, int maximo) {
 int Computador::getColumnaRandom(char equipo){
 	
 	bool flag = false;
+	Tablero *temp = new Tablero();
 	
 	while (!flag){
 		
-		clonarMatriz();
+		copiarTablero(estadoActual, temp);
 		int columna = randomEnRango(0, COLUMNAS - 1);
 		
-		if (copiaTablero->hacerMovimiento(columna, equipo)){
+		if (temp->hacerMovimiento(columna, equipo)){
 			flag = true;
-			vaciarMatriz();
+			delete temp;
 			return columna;	
 		}
 		
 	}
 	
-	vaciarMatriz();
-	return -1;
-	
 }
 
 int Computador::getColumnaCentral(char equipo){
 	
-	clonarMatriz();
+	Tablero *temp = new Tablero();
+	copiarTablero(estadoActual, temp);
 	
-	if (copiaTablero->hacerMovimiento( (COLUMNAS -1 ) / 2, equipo)){
-		vaciarMatriz();
+	if (temp->hacerMovimiento( (COLUMNAS -1 ) / 2, equipo)){
+		delete temp;
 		return (COLUMNAS -1 ) / 2;
 	}
 	
-	vaciarMatriz();
+	return (COLUMNAS-1) / 2;
+	
 	return -1;
 }
 
@@ -213,6 +222,7 @@ int Computador::movimiento(){
 	int columna;
 	columna = elegirColumna(equipo, getOponente());
 	cout <<" "<< columna;
+	system("pause");
 	return columna;
 	
 }

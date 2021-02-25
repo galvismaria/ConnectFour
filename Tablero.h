@@ -29,7 +29,7 @@ class Tablero{
 		void mostrarTabla();
 		int obtenerFilaDesocupada(int columna);
 		Casilla* getCasilla(int x, int y);
-		void setCasilla(Casilla* casilla, int x, int y);
+		void setCasilla(char ficha, int x, int y);
 		void colocarFicha(int fila, int columna, char ficha);
 		bool casillaOcupada(int fila, int columna);
 		bool enRango(int fila, int columna);

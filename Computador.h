@@ -13,14 +13,12 @@ class Computador : public Jugador{
 
 	
 	private:
-		Tablero *copiaTablero;
-		Tablero *original;
+		Tablero *estadoActual;
 		
 	public:
-		Computador(Tablero *original, char equipo);
-		void clonarMatriz();
-		void vaciarMatriz();
-		void setTableroActual(Tablero *original);
+		Computador(char equipo);
+		void setTableroActual(Tablero *actual);
+		void copiarTablero(Tablero *origen, Tablero *destino);
 		int getColumnaGanadora(char equipo);
 		int getUltimaFila(int columna);
 		void getMejorColumna(char equipo, int *conteo, int *indice);

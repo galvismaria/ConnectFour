@@ -54,8 +54,8 @@ Casilla* Tablero::getCasilla(int x, int y){
 	return tabla[x][y];
 }
 
-void Tablero::setCasilla(Casilla* casilla, int x, int y){
-	tabla[x][y] = casilla;
+void Tablero::setCasilla(char ficha, int x, int y){
+	tabla[x][y] = new Casilla(ficha);
 }
 
 void Tablero::colocarFicha(int fila, int columna, char ficha){
