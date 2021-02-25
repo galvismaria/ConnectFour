@@ -161,7 +161,7 @@ int Computador::elegirColumna(char equipo, char oponente){
 	
 	int posibleResultado = getColumnaGanadora(equipo);
 	
-	if ( posibleResultado != -1 ){
+	if ( posibleResultado != -1 && !estadoActual->columnaLlena(posibleResultado)){
 		
 		cout <<"~Elijo ganar~";
 		return posibleResultado;
@@ -170,7 +170,7 @@ int Computador::elegirColumna(char equipo, char oponente){
 	
 	int posibleResultadoOponente = getColumnaGanadora(oponente);
 	
-	if ( posibleResultadoOponente != -1 ){
+	if ( posibleResultadoOponente != -1 && !estadoActual->columnaLlena(posibleResultadoOponente)){
 		
 		cout <<"~Elijo evitar que mi oponente gane~";
 		return posibleResultadoOponente;
@@ -186,28 +186,28 @@ int Computador::elegirColumna(char equipo, char oponente){
 	
 	getMejorColumna(oponente, &conteoOponente, &columnaOponente);
 	
-	if (conteoOponente > conteoCpu){
+	if (conteoOponente > conteoCpu && !estadoActual->columnaLlena(columnaOponente)){
 		
 		cout <<"~Elijo quitarle puntaje a mi oponente~";
         return columnaOponente;
         
     }
 	
-	else if (conteoCpu > 1) {
+	else if (conteoCpu > 1 && !estadoActual->columnaLlena(columnaCpu)) {
         cout <<"~Elijo colocarla donde obtengo un mayor puntaje~";
         return columnaCpu;
     }
     
     int columnaCentral = getColumnaCentral(equipo);
     
-    if (columnaCentral != -1){
+    if (columnaCentral != -1 && !estadoActual->columnaLlena(columnaCentral)){
     	cout <<"~Elijo ponerla en el centro~";
         return columnaCentral;
 	}
 	
 	int columna = getColumnaRandom(equipo);
 	
-	if (columna != -1){
+	if (columna != -1 && !estadoActual->columnaLlena(columna)){
 		cout <<"~Elijo una columna aleatoria~";
         return columna;
 	}

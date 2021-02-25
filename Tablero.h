@@ -32,6 +32,7 @@ class Tablero{
 		void setCasilla(char ficha, int x, int y);
 		void colocarFicha(int fila, int columna, char ficha);
 		bool casillaOcupada(int fila, int columna);
+		bool columnaLlena(int columna);
 		bool enRango(int fila, int columna);
 		bool conectaCuatro(char equipo);
 		bool hacerMovimiento(int columna, char ficha);

@@ -82,6 +82,14 @@ bool Tablero::casillaOcupada(int fila, int columna){
 		return false;
 }
 
+bool Tablero::columnaLlena(int columna){
+	if (casillaOcupada(0, columna))
+		return true;
+		
+	else
+		return false;
+}
+
 bool Tablero::conectaCuatro(char equipo){
 
     // check horizontal
