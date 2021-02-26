@@ -1,8 +1,6 @@
 #include "Humano.h"
 
-Humano::Humano(char equipo){
-	
-	this->equipo = equipo;
+Humano::Humano(char equipo) : Jugador (equipo){
 	
 }
 

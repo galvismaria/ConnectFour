@@ -1,9 +1,6 @@
 #ifndef TABLERO_H
 #define TABLERO_H
 
-#include <iostream>
-#include <stdio.h>
-#include <string>
 #include "Casilla.h"
 #include "Global.h"
 
@@ -20,26 +17,59 @@ class Tablero{
 	
 	private:
 		
+		/* ----- ATRIBUTOS ----- */
+			
 		Casilla* tabla[FILAS][COLUMNAS];
 		
 	public:
 		
-		Tablero();
-		void colocarFichaEn(int columna);
-		void mostrarTabla();
-		int obtenerFilaDesocupada(int columna);
-		Casilla* getCasilla(int x, int y);
+		/* ----- MÉTODOS ----- */
+		
+		/* ----- Constructor ----- */
+		
+		Tablero();													// Constructor sin parámetros -> Crea un tablero con todas las casillas vacías
+		
+		/* ----- Setter ----- */
+		
 		void setCasilla(char ficha, int x, int y);
-		void colocarFicha(int fila, int columna, char ficha);
-		bool casillaOcupada(int fila, int columna);
-		bool columnaLlena(int columna);
-		bool enRango(int fila, int columna);
-		bool conectaCuatro(char equipo);
-		bool hacerMovimiento(int columna, char ficha);
-		int contarArriba(int x, int y, char equipo);
-		int contarDerecha(int x, int y, char equipo);
-		int contarArribaDerecha(int x, int y, char equipo);
-		int contarAbajoDerecha(int x, int y, char equipo);
+		
+		/* ----- Getter ----- */
+		
+		Casilla* getCasilla(int x, int y);
+		
+		/* ----- Procedimientos ----- */						
+		
+		void mostrarTabla();										// Función que imprime el tablero
+																	// Si la ficha en la casilla es '/0', significa que la casilla está vacía, así que se muestra un espacio en blanco
+																	// Si la casilla está ocupada por JUGADOR_1, se imprime una 'X'
+																	// Si la casilla está ocupada por JUGADOR_2, se imprime una 'O'
+																	
+		int obtenerFilaDesocupada(int columna);						// Función que retorna la primera fila desocupada (desde abajo hacia arriba)
+		
+		void colocarFicha(int fila, int columna, char ficha);		// Función que coloca una ficha en unas coordenadas específicas
+		
+		bool casillaOcupada(int fila, int columna);					// Función que valida si una casilla está ocupada o está libre
+		
+		bool columnaLlena(int columna);								// Función que valida si una columna ya está llena
+		
+		bool enRango(int fila, int columna);						// Función que valida si las coordenadas dadas están dentro del rango del tablero
+		
+		bool conectaCuatro(char equipo);							// Función que valida si un jugador ha conectado cuatro piezas,
+																	//ya sea de forma horizontal, vertical o diagonal
+																	
+		bool hacerMovimiento(int columna, char ficha);				// Función para realizar un movimiento
+																	// Según la columna dada, busca la fila donde colocar la ficha dada
+																	
+		int contarArriba(int x, int y, char equipo);				// Función que cuenta cuantas fichas están conectadas hacia arriba
+		
+		int contarDerecha(int x, int y, char equipo);				// Función que cuenta cuantas fichas están conectadas hacia la derecha
+		
+		int contarArribaDerecha(int x, int y, char equipo);			// Función que cuenta cuantas fichas están conectadas en la diagonal superior derecha
+		
+		int contarAbajoDerecha(int x, int y, char equipo);			// Función que cuenta cuantas fichas están conectadas en la diagonal inferior derecha
+		
+		/* ----- Destructor ----- */
+		
 		~Tablero();
 };
 

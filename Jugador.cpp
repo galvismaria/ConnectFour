@@ -1,7 +1,8 @@
 #include "Jugador.h"
 
-Jugador::Jugador(){
-	equipo = '\0';
+Jugador::Jugador(char equipo){
+	
+	this->equipo = equipo;
 	fichasRestantes = FICHAS;
 	ganador = false;
 }

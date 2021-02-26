@@ -6,6 +6,7 @@ int main(){
 	
 	Juego *juego = new Juego();
 	juego->menuPrincipal();
+	juego->~Juego();
 	return 0;
 
 }

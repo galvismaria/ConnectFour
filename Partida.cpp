@@ -43,32 +43,27 @@ void Partida::mostrarDisplay(){
 }
 
 bool Partida::empate(){
-	/*if ((jugador1->sinFichas() && jugador2->sinFichas()) && (!jugador1->esGanador() && !jugador2->esGanador()))
+	if ((jugador1->sinFichas() && jugador2->sinFichas()) && (!jugador1->esGanador() && !jugador2->esGanador()))
 		return true;
 		
 	else
-		return false;*/
+		return false;
 }
 
 bool Partida::finPartida(){
 	
-	/*if (empate()){
+	if (empate()){
 		jugador1->setResultado(false);
 		jugador2->setResultado(false);
 		return true;
-	}*/
+	}
 	
-	/*jugador1->setResultado(tablero->conectaCuatro(jugador1->getEquipo()));
+	jugador1->setResultado(tablero->conectaCuatro(jugador1->getEquipo()));
 	jugador2->setResultado(tablero->conectaCuatro(jugador2->getEquipo()));
 	
 	if (jugador1->esGanador() || jugador2->esGanador())
 		return true;
 	
-	else
-		return false;*/
-		
-	if (tablero->conectaCuatro(jugador1->getEquipo()) || tablero->conectaCuatro(jugador2->getEquipo()) )
-		return true;
 	else
 		return false;
 }

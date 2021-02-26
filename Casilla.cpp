@@ -4,11 +4,11 @@ Casilla::Casilla(){
 	ficha = '\0';
 }
 
-Casilla::Casilla(char ficha){
+void Casilla::setFicha(char ficha){
 	this->ficha = ficha;
 }
 
-void Casilla::setFicha(char ficha){
+Casilla::Casilla(char ficha){
 	this->ficha = ficha;
 }
 
