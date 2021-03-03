@@ -91,20 +91,60 @@ bool Tablero::columnaLlena(int columna){
 }
 
 bool Tablero::conectaCuatro(char equipo){
+    
+    for (int i = 0 ; i < FILAS; i++) {
+        
+        for (int j = 0 ; j < COLUMNAS; j++) {
+        	
+            int conteo = contarArriba(i, j, equipo);
+            
+            if (conteo == CONECTA) {
+            	return true;
+            }
+            
+            conteo = contarDerecha(i, j, equipo);
+            
+            if (conteo == CONECTA) {
+                return true;
+            }
+            
+            conteo = contarArribaDerecha(i, j, equipo);
+            
+            if (conteo == CONECTA) {
+                return true;
+            }
+            
+            conteo = contarAbajoDerecha(i, j, equipo);
+            
+            if (conteo == CONECTA) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+void Tablero::conectarFichas(char equipo){
 
     // check horizontal
     for (int j = 0; j < COLUMNAS - 3 ; j++ ){
         for ( int i = 0; i < FILAS ; i++ ){
             if ( tabla[i][j]->getFicha() == equipo && tabla[i][j+1]->getFicha() == equipo && tabla[i][j+2]->getFicha() == equipo && tabla[i][j+3]->getFicha() == equipo ){
-                return true;
+                tabla[i][j]->conectar(true);
+                tabla[i][j+1]->conectar(true);
+                tabla[i][j+2]->conectar(true);
+                tabla[i][j+3]->conectar(true);
             }           
         }
     }
     // check vertical
     for ( int i = 0; i < FILAS-3 ; i++ ){
         for ( int j = 0; j < COLUMNAS ; j++ ){
-            if ( tabla [i][j]->getFicha() == equipo && tabla[i+1][j]->getFicha() == equipo && tabla[i+2][j]->getFicha() == equipo && tabla[i+3][j]->getFicha() == equipo ){
-                return true;
+            if ( tabla[i][j]->getFicha() == equipo && tabla[i+1][j]->getFicha() == equipo && tabla[i+2][j]->getFicha() == equipo && tabla[i+3][j]->getFicha() == equipo ){
+                tabla[i][j]->conectar(true);
+                tabla[i+1][j]->conectar(true);
+                tabla[i+2][j]->conectar(true);
+                tabla[i+3][j]->conectar(true);
             }           
         }
     }
@@ -112,23 +152,28 @@ bool Tablero::conectaCuatro(char equipo){
     for ( int i = 3; i < FILAS ; i++ ){
         for ( int j = 0; j < COLUMNAS - 3; j++ ){
             if ( tabla[i][j]->getFicha() == equipo && tabla[i-1][j+1]->getFicha() == equipo && tabla[i-2][j+2]->getFicha() == equipo && tabla[i-3][j+3]->getFicha() == equipo )
-                return true;
+                tabla[i][j]->conectar(true);
+                tabla[i-1][j+1]->conectar(true);
+                tabla[i-2][j+2]->conectar(true);
+                tabla[i-3][j+3]->conectar(true);
         }
     }
     // check diagonal descendente
     for ( int i=3; i < FILAS ; i++ ){
         for ( int j = 3 ; j < COLUMNAS ; j++ ){
             if ( tabla [i][j]->getFicha() == equipo && tabla [i-1][j-1]->getFicha() == equipo && tabla[i-2][j-2]->getFicha() == equipo && tabla[i-3][j-3]->getFicha() == equipo)
-                return true;
+                tabla [i][j]->conectar(true);
+                tabla [i-1][j-1]->conectar(true);
+                tabla[i-2][j-2]->conectar(true);
+                tabla[i-3][j-3]->conectar(true);
         }
     }
-    return false;
 }
+
 
 bool Tablero::hacerMovimiento(int columna, char ficha){
 	
 	int fila = obtenerFilaDesocupada(columna);
-	
 	
 	if (fila == -1){
 		return false;
@@ -136,7 +181,11 @@ bool Tablero::hacerMovimiento(int columna, char ficha){
 	
 	if (enRango(fila, columna)){
 		colocarFicha(fila, columna, ficha);
-		return true;
+		
+		/*if (conectaCuatro(ficha)){
+			conectarFichas(ficha);
+		}*/
+		
 	}
 	
 	return false;
@@ -151,7 +200,7 @@ int Tablero::contarArriba(int x, int y, char equipo) {
     
     for (; yInicio <= y; yInicio++) {
     	
-        if (tabla[yInicio][x]->getFicha() == equipo) {
+        if (tabla[yInicio][x]->getFicha() == equipo && !tabla[yInicio][x]->estaConectado() ) {
             contador++;
             
         } else {
@@ -170,7 +219,8 @@ int Tablero::contarDerecha(int x, int y, char equipo) {
     int contador = 0;
     
     for (; x <= xFin; x++) {
-        if (tabla[y][x]->getFicha() == equipo) {
+    	
+        if (tabla[y][x]->getFicha() == equipo && !tabla[y][x]->estaConectado()) {
             contador++;
             
         } else {
@@ -184,12 +234,14 @@ int Tablero::contarDerecha(int x, int y, char equipo) {
 int Tablero::contarArribaDerecha(int x, int y, char equipo) {
 	
     int xFin = (x + CONECTA < COLUMNAS) ? x + CONECTA - 1 : COLUMNAS - 1;
+    
     int yInicio = (y - CONECTA >= 0) ? y - CONECTA + 1 : 0;
+    
     int contador = 0;
     
     while (x <= xFin && yInicio <= y) {
     	
-        if (tabla[y][x]->getFicha() == equipo) {
+        if (tabla[y][x]->getFicha() == equipo && !tabla[y][x]->estaConectado()) {
             contador++;
             
         } else {
@@ -206,12 +258,16 @@ int Tablero::contarArribaDerecha(int x, int y, char equipo) {
 int Tablero::contarAbajoDerecha(int x, int y, char equipo) {
 	
     int xFin = (x + CONECTA < COLUMNAS) ? x + CONECTA - 1 : COLUMNAS - 1;
+    
     int yFin = (y + CONECTA < FILAS) ? y + CONECTA - 1 : FILAS - 1;
+    
     int contador = 0;
     
     while (x <= xFin && y <= yFin) {
-        if (tabla[y][x]->getFicha() == equipo) {
+    	
+        if (tabla[y][x]->getFicha() == equipo && !tabla[y][x]->estaConectado()) {
             contador++;
+            
         } else {
             contador = 0;
         }

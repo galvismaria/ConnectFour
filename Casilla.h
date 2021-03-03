@@ -22,6 +22,7 @@ class Casilla{
 		/* ----- ATRIBUTOS ----- */
 		
 		char ficha;
+		bool conectado;
 		
 	public:
 		
@@ -35,10 +36,16 @@ class Casilla{
 		/* ----- Setter ----- */
 		
 		void setFicha(char ficha);
+		void conectar(bool conectado);
 		
 		/* ----- Getter ----- */
 		
 		char getFicha();
+		bool estaConectado();
+		
+		/* ----- Procedimientos ----- */
+		
+		
 		
 		/* ----- Destructor ----- */
 		

@@ -43,7 +43,7 @@ void Partida::mostrarDisplay(){
 }
 
 bool Partida::empate(){
-	if ((jugador1->sinFichas() && jugador2->sinFichas()) && (!jugador1->esGanador() && !jugador2->esGanador()))
+	if ((jugador1->sinFichas() && jugador2->sinFichas()) && (jugador1->getPuntaje() == jugador2->getPuntaje()))
 		return true;
 		
 	else
@@ -52,20 +52,37 @@ bool Partida::empate(){
 
 bool Partida::finPartida(){
 	
-	if (empate()){
-		jugador1->setResultado(false);
-		jugador2->setResultado(false);
-		return true;
+	bool flag;
+	
+	for ( int i = 0 ; i < COLUMNAS ; i++ )
+		if (tablero->columnaLlena(i))
+			flag = true;
+		else 
+			flag = false;
+	
+	if (flag){
+		
+		if (empate()){
+			jugador1->setResultado(false);
+			jugador2->setResultado(false);
+			return true;
+		}
+		
+		if (jugador1->getPuntaje() > jugador2->getPuntaje()){
+			jugador1->setResultado(true);
+			return true;
+		}
+		
+		if (jugador2->getPuntaje() > jugador1->getPuntaje()){
+			jugador2->setResultado(true);
+			return true;
+		}
+	
+		else
+			return false;
+		
 	}
-	
-	jugador1->setResultado(tablero->conectaCuatro(jugador1->getEquipo()));
-	jugador2->setResultado(tablero->conectaCuatro(jugador2->getEquipo()));
-	
-	if (jugador1->esGanador() || jugador2->esGanador())
-		return true;
-	
-	else
-		return false;
+
 }
 
 Partida::~Partida(){

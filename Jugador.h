@@ -23,6 +23,7 @@ class Jugador{
 		char equipo;
 		int fichasRestantes;
 		bool ganador;
+		int puntaje;
 		
 		
 	public:
@@ -38,11 +39,13 @@ class Jugador{
 		void setEquipo(char equipo);
 		void setFichasRestantes(int fichasRestantes);
 		void setResultado(bool resultado);
+		void setPuntaje(int puntaje);
 		
 		/* ----- Getters ----- */
 		
 		char getEquipo();
 		int getFichasRestantes();
+		int getPuntaje();
 		bool esGanador();
 		
 		/* ----- Procedimientos ----- */
@@ -54,10 +57,14 @@ class Jugador{
 																	
 		void mostrarFichas();										// Función que muestra la cantidad de fichas restantes del jugador
 		
+		void mostrarPuntaje();
+		
 		bool sinFichas();											// Función que retorna true si el jugador se ha quedado sin fichas
 																	// y false si todavía hay fichas que puede utilizar
 																	
 		void perderFicha();											// Función que le quita una ficha al jugador
+		
+		void sumarPunto();
 		
 		virtual int movimiento() = 0;								// Función virtual pura, que se sobreescribe en las clases Humano y Computador
 																	// de la forma en que sea necesario en cada caso

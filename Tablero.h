@@ -56,7 +56,9 @@ class Tablero{
 		
 		bool conectaCuatro(char equipo);							// Función que valida si un jugador ha conectado cuatro piezas,
 																	//ya sea de forma horizontal, vertical o diagonal
-																	
+				
+		void conectarFichas(char equipo);
+																
 		bool hacerMovimiento(int columna, char ficha);				// Función para realizar un movimiento
 																	// Según la columna dada, busca la fila donde colocar la ficha dada
 																	

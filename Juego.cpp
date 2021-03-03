@@ -103,7 +103,9 @@ bool Juego::jugarTurnoDe(Jugador* jugador){
 	}
 	
 	partida->getJugador1()->mostrarFichas();
+	partida->getJugador1()->mostrarPuntaje();
 	partida->getJugador2()->mostrarFichas();
+	partida->getJugador2()->mostrarPuntaje();
 	
 	int columna;
 	bool flag = false;
@@ -127,6 +129,8 @@ bool Juego::jugarTurnoDe(Jugador* jugador){
 			if ( partida->getTablero()->hacerMovimiento(columna, jugador->getEquipo()) ){
 				partida->mostrarDisplay();
 				jugador->perderFicha();
+				if (partida->getTablero()->conectaCuatro(jugador->getEquipo()))
+					jugador->sumarPunto();
 				return true;
 			}
 			
