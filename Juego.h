@@ -8,7 +8,11 @@ using namespace std;
 
 /*
 	Clase encargada del manejo del juego.
-	Hay tres opciones de juego:
+	Hay dos modalidades de juego:
+		-> Modalidad clásica, donde el ganador es el primer jugador en una secuencia de cuatro en línea.
+		-> Modalidad especial, donde la partida acaba cuando el tablero está lleno y el ganador es el jugador con más secuencias completadas.
+		
+	Hay tres opciones de configurar el juego:
 		-> Humano vs Humano, donde cada jugador ingresa manualmente sus jugadas.
 		-> Humano vs Computador, donde el jugador humano ingresa manualmente sus jugadas y la jugada del computador se obtiene mediante cálculos.
 		-> Computador vs Computador, donde ambos jugadores son manejados por la computadora (en este caso, las jugadas se muestran de una en una cada vez que se toca una tecla en la consolta).

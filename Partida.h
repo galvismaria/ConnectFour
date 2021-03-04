@@ -9,7 +9,11 @@
 
 /*
 	Clase encargada de crear la partida.
-	Hay tres opciones de juego:
+	Hay dos modalidades de juego:
+		-> Modalidad clásica, donde el ganador es el primer jugador en una secuencia de cuatro en línea.
+		-> Modalidad especial, donde la partida acaba cuando el tablero está lleno y el ganador es el jugador con más secuencias completadas.
+	
+	Hay tres formas de las que se pueden inicializar los atributs de la partida:
 		-> Humano vs Humano, donde cada jugador ingresa manualmente sus jugadas
 		-> Humano vs Computador, donde el jugador humano ingresa manualmente sus jugadas y la jugada del computador se obtiene mediante cálculos
 		-> Computador vs Computador, donde ambos jugadores son manejados por la computadora

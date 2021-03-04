@@ -147,6 +147,8 @@ int Computador::buscarColumnaRandom(char equipo){
 		
 	}
 	
+	return -1;
+	
 }
 
 int Computador::buscarColumnaCentral(char equipo){
@@ -158,8 +160,6 @@ int Computador::buscarColumnaCentral(char equipo){
 		delete temp;
 		return ( COLUMNAS - 1 ) / 2;
 	}
-	
-	return ( COLUMNAS - 1 ) / 2;
 	
 	return -1;
 }
