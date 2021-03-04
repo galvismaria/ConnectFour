@@ -10,6 +10,7 @@ void Juego::menuPrincipal(){
 		
 	int opcion = 0;
 	bool conf =  false;
+	partida = new Partida();
 	
 	
 	cout << "\n\n\n\n" <<
@@ -48,13 +49,15 @@ void Juego::menuPrincipal(){
 			case(1):
 				
 				elegirModoJuego();
-				iniciarPartidaClasica();						
+				iniciarPartidaClasica();
+				partida = new Partida();						
 				break;
 				
 			case(2):
 				
 				elegirModoJuego();
 				iniciarPartidaModificada();
+				partida = new Partida();
 				break;	
 				
 			case(3):
@@ -86,7 +89,7 @@ void Juego::elegirModoJuego(){
 			
 	cout << "\n\n\n\n\t\t\t\tElije el modo de juego:";
 	
-	cout << "\n\n\t\t1. Humano vs Humano\n\n\t\t2. Humano vs Computadora   \n\n\t\t3. Computadora vs Computadora\n\n\t\t4. Salir del juego\n\n";
+	cout << "\n\n\t\t1. Humano vs Humano\n\n\t\t2. Humano vs Computadora   \n\n\t\t3. Computadora vs Computadora\n\n\t\t";
 	
 	while ( conf == false ) {
 			
@@ -106,25 +109,18 @@ void Juego::elegirModoJuego(){
 			
 		case(1):
 				
-			partida = new Partida();
 			partida->HumanoVsHumano();						
 			return;
 				
 		case(2):
 				
-			partida = new Partida();
 			partida->HumanoVsComputador();
 			return;	
 									
 		case(3):
 				
-			partida = new Partida();
 			partida->ComputadorVsComputador();					
-			return;
-				
-		case(4):
-			salir();
-			return;			
+			return;		
 				
 		default:
 			break;

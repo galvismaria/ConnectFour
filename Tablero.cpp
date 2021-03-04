@@ -328,5 +328,5 @@ int Tablero::contarSecuencias(char equipo){
 }
 
 Tablero::~Tablero(){
-	delete [] tabla;
+	delete &tabla;
 }

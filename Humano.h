@@ -30,6 +30,8 @@ class Humano : public Jugador{
 		bool esComputador();					// Siempre retorna true, se usa para saber si el jugador es una Computadora
 			
 		void setTableroActual(Tablero *original){};
+		
+		~Humano();
 };
 
 #endif

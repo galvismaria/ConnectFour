@@ -17,5 +17,5 @@ char Casilla::getFicha(){
 }
 
 Casilla::~Casilla(){
-	;
+	delete &ficha;
 }

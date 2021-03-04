@@ -16,3 +16,7 @@ int Humano::movimiento(){
 bool Humano::esComputador(){
 	return false;
 }
+
+Humano::~Humano() {
+	;
+}

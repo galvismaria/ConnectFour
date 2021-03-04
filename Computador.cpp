@@ -239,4 +239,5 @@ bool Computador::esComputador(){
 }
 
 Computador::~Computador(){
+	delete [] estadoActual;
 }

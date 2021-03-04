@@ -93,5 +93,8 @@ void Jugador::perderFicha(){
 }
 
 Jugador::~Jugador(){
-	;
+	delete &equipo;
+	delete &fichasRestantes;
+	delete &ganador;
+	delete &puntos;
 }

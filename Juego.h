@@ -48,7 +48,6 @@ class Juego{
 													// -> Ingresar (1) para seleccionar una partida Humano vs Humano
 													// -> Ingresar (2) para seleccionar una partida Humano vs Computadora
 													// -> Ingresar (3) para seleccionar una partida Computadora vs Computadora
-													// -> Ingresar (4) para salir
 											
 		void iniciarPartidaClasica();				// Función que inicia la partida de modalidad clásica y controla los turnos de los jugadores.
 													// Gracias al polimorfismo, el esta función funciona para cualquier tipo de partida.
