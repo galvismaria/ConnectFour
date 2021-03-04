@@ -35,22 +35,41 @@ class Juego{
 		
 		void menuPrincipal();						// Función que muestra el menú principal del juego, dejando ver las opciones de juego.
 													// En esta pantalla principal, el usuario puede:
-													// -> Ingresar (1) para seleccionar la modalidad Humano vs Humano
-													// -> Ingresar (2) para seleccionar la modalidad Humano vs Computadora
-													// -> Ingresar (3) para seleccionar la modalidad Computadora vs Computadora
-													// -> Ingresar (4) para salir
+													// -> Ingresar (1) para seleccionar la modalidad clasica de juego
+													// -> Ingresar (2) para seleccionar la modalidad especial de juego
+													// -> Ingresar (3) para salir
 													// Cabe destacar que cada vez que se concluya una partida, se regresa a este menú.
-													
-		void iniciarPartida();						// Función que inicia la partida y controla los turnos de los jugadores.
+		
+		void elegirModoJuego();						// Función que permite elegir entre los siguientes modos de juego:
+													// -> Ingresar (1) para seleccionar una partida Humano vs Humano
+													// -> Ingresar (2) para seleccionar una partida Humano vs Computadora
+													// -> Ingresar (3) para seleccionar una partida Computadora vs Computadora
+													// -> Ingresar (4) para salir
+											
+		void iniciarPartidaClasica();				// Función que inicia la partida de modalidad clásica y controla los turnos de los jugadores.
 													// Gracias al polimorfismo, el esta función funciona para cualquier tipo de partida.
 													// Se encarga de mostrar el tablero, y entrega turnos a los jugadores hasta que haya victoria o empate.
-													
+													// En esta modalidad de juego, la partida acaba cuando alguno de los jugadores hace un cuatro en línea.
+												
 		bool jugarTurnoDe(Jugador* jugador);		// Función que controla el turno del jugador que sea pasado como parámetro.
 													// Gracias al polimrfismo, esta función funciona para un Humano o Computador.
 													// En la función se llama a la función movimiento() que es sobreecrita en las clases Humano y Computador,
 													// se valida que el movimientosea válido y si no lo es, se vuelve a solicitar.
 													// Si el movimiento se realiza correctamente retorna true, sino retorna false
+		
+		void iniciarPartidaModificada(); 			// Función que inicia la partida de modalidad especial del juego y controla los turnos de los jugadres.
+													// Gracias al polimorfismo, el esta función funciona para cualquier tipo de partida.
+													// Se encarga de mostrar el tablero, y entrega turnos a los jugadores hasta que haya victoria o empate.
+													// En esta modalidad de juego, la partida acaba cuando el tablero está lleno.
+													// El ganador de la partida es el jugador con mayor cantidad de secuencias de cuatro en línea.
 													
+		bool jugarTurnoModificado(Jugador* jugador);// Función especial para controlar el turno del jugador que sea pasado como parámetro, en la modalidad especial de juego
+													// Gracias al polimrfismo, esta función funciona para un Humano o Computador.
+													// En la función se llama a la función movimiento() que es sobreecrita en las clases Humano y Computador,
+													// se valida que el movimientosea válido y si no lo es, se vuelve a solicitar.
+													// Si el movimiento se realiza correctamente retorna true, sino retorna false
+													// En cada movimiento se actualiza el puntaje del jugador aactual.
+												
 		void salir();								// Función que pone fin al programa
 		
 		/* ----- Destructor ----- */

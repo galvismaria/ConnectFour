@@ -16,18 +16,18 @@ void Tablero::mostrarTabla(){
 	
 	cout << "\n\t\t\t\t | 1 | | 2 | | 3 | | 4 | | 5 | | 6 | | 7 | \n";
 	
-	for (int i =  0 ; i < FILAS ; i++){
+	for ( int i =  0 ; i < FILAS ; i++ ){
 		cout <<"\t\t\t\t";
 		
-		for (int j = 0 ; j < COLUMNAS; j++){
+		for ( int j = 0 ; j < COLUMNAS; j++ ){
 			
-		if (tabla[i][j]->getFicha() == '\0')
+		if ( tabla[i][j]->getFicha() == '\0' )
 				cout << " |   |";
 				
-			if (tabla[i][j]->getFicha() == JUGADOR_1)
+			if ( tabla[i][j]->getFicha() == JUGADOR_1 )
 				cout << " | X |";
 				
-			if (tabla[i][j]->getFicha() == JUGADOR_2)
+			if ( tabla[i][j]->getFicha() == JUGADOR_2 )
 				cout << " | O |";
 		
 		}
@@ -38,9 +38,9 @@ void Tablero::mostrarTabla(){
 
 int Tablero::obtenerFilaDesocupada(int columna){
 	
-	for (int i = FILAS-1 ; i >= 0 ; i--){
+	for ( int i = FILAS-1 ; i >= 0 ; i-- ){
 		
-		if (tabla[i][columna]->getFicha() == '\0'){
+		if ( tabla[i][columna]->getFicha() == '\0' ){
 			return i;
 		
 		}
@@ -50,23 +50,23 @@ int Tablero::obtenerFilaDesocupada(int columna){
 	
 }
 
-Casilla* Tablero::getCasilla(int x, int y){
+Casilla* Tablero::getCasilla( int x, int y ){
 	return tabla[x][y];
 }
 
-void Tablero::setCasilla(char ficha, int x, int y){
+void Tablero::setCasilla( char ficha, int x, int y ){
 	tabla[x][y] = new Casilla(ficha);
 }
 
-void Tablero::colocarFicha(int fila, int columna, char ficha){
+void Tablero::colocarFicha( int fila, int columna, char ficha ){
 	
 	tabla[fila][columna]->setFicha(ficha);
 	
 }
 
-bool Tablero::enRango(int fila, int columna) {
+bool Tablero::enRango( int fila, int columna ) {
 	
-	if ((columna >= 0 && columna < COLUMNAS) && (fila >= 0 && fila < FILAS))
+	if ( ( columna >= 0 && columna < COLUMNAS ) && ( fila >= 0 && fila < FILAS ) )
 		return true;
 		
 	else
@@ -74,52 +74,55 @@ bool Tablero::enRango(int fila, int columna) {
 	
 }
 
-bool Tablero::casillaOcupada(int fila, int columna){
+bool Tablero::casillaOcupada( int fila, int columna ){
 	
-	if (tabla[fila][columna]->getFicha() == JUGADOR_1 || tabla[fila][columna]->getFicha() == JUGADOR_2)
+	if ( tabla[fila][columna]->getFicha() == JUGADOR_1 || tabla[fila][columna]->getFicha() == JUGADOR_2 )
 		return true;
 	else
 		return false;
 }
 
-bool Tablero::columnaLlena(int columna){
-	if (casillaOcupada(0, columna))
+bool Tablero::columnaLlena( int columna ){
+	if (casillaOcupada( 0, columna) )
 		return true;
 		
 	else
 		return false;
+}
+
+bool Tablero::tableroLleno(){
+	
+	bool flag;
+	
+	for ( int i = 0 ; i < COLUMNAS ; i++ ){
+		flag = columnaLlena(i);
+	
+	}
+	
+	return flag;
+	
 }
 
 bool Tablero::conectaCuatro(char equipo){
-
-    // check horizontal
-    for (int j = 0; j < COLUMNAS - 3 ; j++ ){
-        for ( int i = 0; i < FILAS ; i++ ){
-            if ( tabla[i][j]->getFicha() == equipo && tabla[i][j+1]->getFicha() == equipo && tabla[i][j+2]->getFicha() == equipo && tabla[i][j+3]->getFicha() == equipo ){
+    
+    for (int y = 0; y < FILAS; y++) {
+        
+        for (int x = 0; x < COLUMNAS; x++) {
+        	
+            int conteoArriba = contarArriba(x, y, equipo);
+            
+            if (conteoArriba == CONECTA) {
                 return true;
-            }           
-        }
-    }
-    // check vertical
-    for ( int i = 0; i < FILAS-3 ; i++ ){
-        for ( int j = 0; j < COLUMNAS ; j++ ){
-            if ( tabla [i][j]->getFicha() == equipo && tabla[i+1][j]->getFicha() == equipo && tabla[i+2][j]->getFicha() == equipo && tabla[i+3][j]->getFicha() == equipo ){
+            }
+            if (contarDerecha(x, y, equipo) == CONECTA) {
                 return true;
-            }           
-        }
-    }
-    // check diagonal ascendente
-    for ( int i = 3; i < FILAS ; i++ ){
-        for ( int j = 0; j < COLUMNAS - 3; j++ ){
-            if ( tabla[i][j]->getFicha() == equipo && tabla[i-1][j+1]->getFicha() == equipo && tabla[i-2][j+2]->getFicha() == equipo && tabla[i-3][j+3]->getFicha() == equipo )
+            }
+            if (contarArribaDerecha(x, y, equipo) == CONECTA) {
                 return true;
-        }
-    }
-    // check diagonal descendente
-    for ( int i=3; i < FILAS ; i++ ){
-        for ( int j = 3 ; j < COLUMNAS ; j++ ){
-            if ( tabla [i][j]->getFicha() == equipo && tabla [i-1][j-1]->getFicha() == equipo && tabla[i-2][j-2]->getFicha() == equipo && tabla[i-3][j-3]->getFicha() == equipo)
-                return true;
+            }
+            if (contarAbajoDerecha(x, y, equipo) == CONECTA) {
+			    return true;
+			}
         }
     }
     return false;
@@ -128,7 +131,6 @@ bool Tablero::conectaCuatro(char equipo){
 bool Tablero::hacerMovimiento(int columna, char ficha){
 	
 	int fila = obtenerFilaDesocupada(columna);
-	
 	
 	if (fila == -1){
 		return false;
@@ -152,6 +154,7 @@ int Tablero::contarArriba(int x, int y, char equipo) {
     for (; yInicio <= y; yInicio++) {
     	
         if (tabla[yInicio][x]->getFicha() == equipo) {
+        	
             contador++;
             
         } else {
@@ -170,7 +173,9 @@ int Tablero::contarDerecha(int x, int y, char equipo) {
     int contador = 0;
     
     for (; x <= xFin; x++) {
+    	
         if (tabla[y][x]->getFicha() == equipo) {
+        	
             contador++;
             
         } else {
@@ -190,10 +195,13 @@ int Tablero::contarArribaDerecha(int x, int y, char equipo) {
     while (x <= xFin && yInicio <= y) {
     	
         if (tabla[y][x]->getFicha() == equipo) {
+        	
             contador++;
             
         } else {
+        	
             contador = 0;
+            
         }
         
         x++;
@@ -210,10 +218,15 @@ int Tablero::contarAbajoDerecha(int x, int y, char equipo) {
     int contador = 0;
     
     while (x <= xFin && y <= yFin) {
+    	
         if (tabla[y][x]->getFicha() == equipo) {
+        	
             contador++;
+            
         } else {
+        	
             contador = 0;
+            
         }
         x++;
         y++;
@@ -221,6 +234,99 @@ int Tablero::contarAbajoDerecha(int x, int y, char equipo) {
     return contador;
 }
 
+int Tablero::contarSecuencias(char equipo){
+	
+	Casilla *copia[FILAS][COLUMNAS];
+	
+	int cont = 0 ;
+	
+	for ( int i = 0 ; i < FILAS ; i++ ){
+		
+		for ( int j = 0 ; j < COLUMNAS ; j++ ){
+			
+			copia[i][j] = new Casilla();
+			copia[i][j]->setFicha( tabla[i][j]->getFicha() );
+			
+		}
+	}
+	
+	// check horizontal
+	for (int j = 0; j < COLUMNAS - 3 ; j++ ){
+        for ( int i = 0; i < FILAS ; i++ ){
+            if ( copia[i][j]->getFicha() == equipo &&
+				 copia[i][j+1]->getFicha() == equipo &&
+				 copia[i][j+2]->getFicha() == equipo &&
+				 copia[i][j+3]->getFicha() == equipo ){
+                	
+                copia[i][j]->setFicha('\0');
+				copia[i][j+1]->setFicha('\0');
+				copia[i][j+2]->setFicha('\0');
+				copia[i][j+3]->setFicha('\0');
+				
+				cont++;
+					
+            }           
+        }
+    }
+
+	// check vertical
+	for ( int i = 0; i < FILAS-3 ; i++ ){
+	    for ( int j = 0; j < COLUMNAS ; j++ ){
+	        if ( copia [i][j]->getFicha() == equipo &&
+				 copia[i+1][j]->getFicha() == equipo &&
+				 copia[i+2][j]->getFicha() == equipo &&
+				 copia[i+3][j]->getFicha() == equipo ){
+	                
+				copia[i][j]->setFicha('\0');
+				copia[i+1][j]->setFicha('\0');
+				copia[i+2][j]->setFicha('\0');
+				copia[i+3][j]->setFicha('\0');
+					
+				cont++;
+	        }           
+	    }
+	}
+	    
+	// check diagonal ascendente
+	for ( int i = 3; i < FILAS ; i++ ){
+	    for ( int j = 0; j < COLUMNAS - 3; j++ ){
+	        if ( copia[i][j]->getFicha() == equipo &&
+				 copia[i-1][j+1]->getFicha() == equipo &&
+				 copia[i-2][j+2]->getFicha() == equipo &&
+				 copia[i-3][j+3]->getFicha() == equipo ){
+		     
+	            copia[i][j]->setFicha('\0');
+				copia[i-1][j+1]->setFicha('\0');
+				copia[i-2][j+2]->setFicha('\0');
+				copia[i-3][j+3]->setFicha('\0');
+					
+				cont++;
+	        }
+	    }
+	}
+	    
+	// check diagonal descendente
+	for ( int i=3; i < FILAS ; i++ ){
+	    for ( int j = 3 ; j < COLUMNAS ; j++ ){
+	        if ( copia [i][j]->getFicha() == equipo &&
+				 copia [i-1][j-1]->getFicha() == equipo &&
+				 copia[i-2][j-2]->getFicha() == equipo &&
+				 copia[i-3][j-3]->getFicha() == equipo){
+			 
+	            copia[i][j]->setFicha('\0');
+				copia[i-1][j-1]->setFicha('\0');
+				copia[i-2][j-2]->setFicha('\0');
+				copia[i-3][j-3]->setFicha('\0');
+					
+				cont++;
+	        }
+	    }
+	}
+	    
+	return cont;
+			
+}
+
 Tablero::~Tablero(){
-	;
+	delete [] tabla;
 }

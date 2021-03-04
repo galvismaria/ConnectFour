@@ -52,20 +52,51 @@ bool Partida::empate(){
 
 bool Partida::finPartida(){
 	
-	if (empate()){
+	if ( empate() ){
 		jugador1->setResultado(false);
 		jugador2->setResultado(false);
 		return true;
 	}
 	
-	jugador1->setResultado(tablero->conectaCuatro(jugador1->getEquipo()));
-	jugador2->setResultado(tablero->conectaCuatro(jugador2->getEquipo()));
+	jugador1->setResultado( tablero->conectaCuatro( jugador1->getEquipo() ) );
+	jugador2->setResultado( tablero->conectaCuatro( jugador2->getEquipo() ) );
 	
 	if (jugador1->esGanador() || jugador2->esGanador())
 		return true;
 	
 	else
 		return false;
+}
+
+bool Partida::finPartidaModificada(){
+
+	if ( tablero->tableroLleno() ){
+		
+		if ( jugador1->getPuntos() > jugador2->getPuntos() ){
+			jugador1->setResultado(true);
+		}
+		
+		if ( jugador2->getPuntos() > jugador1->getPuntos() ){
+			jugador2->setResultado(true);
+		}
+		
+		if ( empate() ){
+			
+			jugador1->setResultado(false);
+			jugador2->setResultado(false);
+			
+			return true;
+		}
+		
+		if (jugador1->esGanador() || jugador2->esGanador())
+			return true;
+	
+		else
+			return false;
+			
+	}
+	
+	return false;
 }
 
 Partida::~Partida(){

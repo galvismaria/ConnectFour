@@ -23,6 +23,7 @@ class Jugador{
 		char equipo;
 		int fichasRestantes;
 		bool ganador;
+		int puntos;
 		
 		
 	public:
@@ -38,12 +39,14 @@ class Jugador{
 		void setEquipo(char equipo);
 		void setFichasRestantes(int fichasRestantes);
 		void setResultado(bool resultado);
+		void setPuntos(int puntos);
 		
 		/* ----- Getters ----- */
 		
 		char getEquipo();
 		int getFichasRestantes();
 		bool esGanador();
+		int getPuntos();
 		
 		/* ----- Procedimientos ----- */
 		
@@ -53,6 +56,8 @@ class Jugador{
 																	// y viceversa.
 																	
 		void mostrarFichas();										// Función que muestra la cantidad de fichas restantes del jugador
+		
+		void mostrarPuntos();										// Función que muestra los puntos acumulados del jugador
 		
 		bool sinFichas();											// Función que retorna true si el jugador se ha quedado sin fichas
 																	// y false si todavía hay fichas que puede utilizar

@@ -55,8 +55,17 @@ class Partida{
 		
 		bool empate();							// Función que valida si hay un empate en la partida
 												// Retorna true si es así, y false en caso contrario
+																				
+		bool finPartida();						// Función que valida si una partida de modalidad clasica ha terminado.
+												// La partida se finaliza cuando un jugador realiza un cuatro en linea.
+												//El ganador es el jugador en realizar el cuatro en linea.
+												// -> Si hay un empate, no le da la victoria a ningún jugador y devuelve true
+												// -> Si hay un ganador, devuelve true 
+												// -> Si nadie ha ganado ni hay empate, devuelve false
 												
-		bool finPartida();						// Función que valida si la partida ha terminado.
+		bool finPartidaModificada();			// Función que valida si una partida de modalidad especial ha terminado.
+												// La partida se finaliza cuando el tablero está lleno.
+												// El ganador es el jugador con más secuencias de cuatro en linea.
 												// -> Si hay un empate, no le da la victoria a ningún jugador y devuelve true
 												// -> Si hay un ganador, devuelve true 
 												// -> Si nadie ha ganado ni hay empate, devuelve false

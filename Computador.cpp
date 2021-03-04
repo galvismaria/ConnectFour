@@ -72,40 +72,48 @@ void Computador::buscarMejorColumna(char equipo, int *conteo, int *indice){
 	
 	for ( int i = 0 ; i < COLUMNAS ; i++ ){
 		
-		copiarTablero(estadoActual, temp);
+		copiarTablero( estadoActual, temp );
 		
-		if ( temp->hacerMovimiento(i, equipo) ){
+		if ( temp->hacerMovimiento( i, equipo) ){
 			
 			int filaReciente = buscarUltimaFila(i);
 			
 			if ( filaReciente != -1 ){
 				
-				int c = temp->contarArriba(i, filaReciente, equipo);
+				int c = temp->contarArriba( i, filaReciente, equipo );
 				
 				if ( c > contMayor ){
+					
 					contMayor = c;
 					iColumnaMayor = i;
+					
 				}
 				
-				c = temp->contarArribaDerecha(i, filaReciente, equipo);
+				c = temp->contarArribaDerecha( i, filaReciente, equipo );
 				
 				if ( c > contMayor ){
+					
 					contMayor = c;
 					iColumnaMayor = i;
+					
 				}
 				
-				c = temp->contarDerecha(i, filaReciente, equipo);
+				c = temp->contarDerecha( i, filaReciente, equipo );
 				
 				if ( c > contMayor ){
+					
 					contMayor = c;
 					iColumnaMayor = i;
+					
 				}
 				
-				c = temp->contarAbajoDerecha(i, filaReciente, equipo);
+				c = temp->contarAbajoDerecha( i, filaReciente, equipo );
 				
 				if ( c > contMayor ){
+					
 					contMayor = c;
 					iColumnaMayor = i;
+					
 				}
 			}
 		}
@@ -115,7 +123,6 @@ void Computador::buscarMejorColumna(char equipo, int *conteo, int *indice){
 	*conteo = contMayor;
 	*indice = iColumnaMayor;
 	delete temp;
-	
 }
 
 int Computador::randomEnRango(int minimo, int maximo) {
@@ -157,13 +164,14 @@ int Computador::buscarColumnaCentral(char equipo){
 	return -1;
 }
 
+
 int Computador::elegirColumna(char equipo, char oponente){
 	
 	int posibleResultado = buscarColumnaGanadora(equipo);
 	
 	if ( posibleResultado != -1 && !estadoActual->columnaLlena(posibleResultado) ){
 		
-		cout <<"~Elijo ganar~";
+		//cout <<"~Elijo ganar~";
 		return posibleResultado;
 		
 	}
@@ -172,11 +180,10 @@ int Computador::elegirColumna(char equipo, char oponente){
 	
 	if ( posibleResultadoOponente != -1 && !estadoActual->columnaLlena(posibleResultadoOponente) ){
 		
-		cout <<"~Elijo evitar que mi oponente gane~";
+		//cout <<"~Elijo evitar que mi oponente gane~";
 		return posibleResultadoOponente;
 		
 	}
-	
 	
 	int conteoCpu, columnaCpu;
 	
@@ -188,31 +195,31 @@ int Computador::elegirColumna(char equipo, char oponente){
 	
 	if ( conteoOponente > conteoCpu && !estadoActual->columnaLlena(columnaOponente) ){
 		
-		cout <<"~Elijo quitarle puntaje a mi oponente~";
+		//cout <<"~Elijo quitarle puntaje a mi oponente~";
         return columnaOponente;
         
     }
 	
 	else if ( conteoCpu > 1 && !estadoActual->columnaLlena(columnaCpu) ) {
-        cout <<"~Elijo colocarla donde obtengo un mayor puntaje~";
+        //cout <<"~Elijo colocarla donde obtengo un mayor puntaje~";
         return columnaCpu;
     }
     
     int columnaCentral = buscarColumnaCentral(equipo);
     
     if ( columnaCentral != -1 && !estadoActual->columnaLlena(columnaCentral) ){
-    	cout <<"~Elijo ponerla en el centro~";
+    	//cout <<"~Elijo ponerla en el centro~";
         return columnaCentral;
 	}
 	
 	int columna = buscarColumnaRandom(equipo);
 	
 	if ( columna != -1 && !estadoActual->columnaLlena(columna) ){
-		cout <<"~Elijo una columna aleatoria~";
+		//cout <<"~Elijo una columna aleatoria~";
         return columna;
 	}
 	
-	cout <<"~Esto no debería pasar~";
+	//cout <<"~Esto no debería pasar~";
     return 0;
 	
 }

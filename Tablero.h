@@ -52,14 +52,16 @@ class Tablero{
 		
 		bool columnaLlena(int columna);								// Función que valida si una columna ya está llena
 		
+		bool tableroLleno();										// Función que verifica si el tablero está lleno
+		
 		bool enRango(int fila, int columna);						// Función que valida si las coordenadas dadas están dentro del rango del tablero
 		
 		bool conectaCuatro(char equipo);							// Función que valida si un jugador ha conectado cuatro piezas,
-																	//ya sea de forma horizontal, vertical o diagonal
+																	// ya sea de forma horizontal, vertical o diagonal
 																	
 		bool hacerMovimiento(int columna, char ficha);				// Función para realizar un movimiento
 																	// Según la columna dada, busca la fila donde colocar la ficha dada
-																	
+																
 		int contarArriba(int x, int y, char equipo);				// Función que cuenta cuantas fichas están conectadas hacia arriba
 		
 		int contarDerecha(int x, int y, char equipo);				// Función que cuenta cuantas fichas están conectadas hacia la derecha
@@ -67,6 +69,8 @@ class Tablero{
 		int contarArribaDerecha(int x, int y, char equipo);			// Función que cuenta cuantas fichas están conectadas en la diagonal superior derecha
 		
 		int contarAbajoDerecha(int x, int y, char equipo);			// Función que cuenta cuantas fichas están conectadas en la diagonal inferior derecha
+		
+		int contarSecuencias(char equipo);							// Función que cuenta cuantas secuencias de cuatro en linea hay para un jugador
 		
 		/* ----- Destructor ----- */
 		
